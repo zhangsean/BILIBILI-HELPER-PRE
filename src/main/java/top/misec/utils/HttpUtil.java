@@ -95,7 +95,6 @@ public class HttpUtil {
             resultJson = processResult(httpResponse);
         } catch (Exception e) {
             log.error("", e);
-            e.printStackTrace();
         } finally {
             httpResource(httpClient, httpResponse);
         }
@@ -134,7 +133,7 @@ public class HttpUtil {
             httpResponse = httpClient.execute(httpGet);
             resultJson = processResult(httpResponse);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         } finally {
             // 关闭资源
             httpResource(httpClient, httpResponse);
@@ -175,14 +174,14 @@ public class HttpUtil {
             try {
                 response.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
         if (null != httpClient) {
             try {
                 httpClient.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
     }

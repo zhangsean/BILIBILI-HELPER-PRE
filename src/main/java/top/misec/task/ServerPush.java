@@ -37,7 +37,7 @@ public class ServerPush {
             } else if (ftKey.length() == PushPlusPush.PUSH_PLUS_CHANNEL_TOKEN_DEFAULT_LENGTH) {
                 push = new PushPlusPush();
                 log.info("本次执行推送日志到Push Plus");
-            }else if (ftKey.length() == WeiXinPush.WEIXIN_CHANNEL_TOKEN_DEFAULT_LENGTH) {
+            } else if (ftKey.length() == WeiXinPush.WEIXIN_CHANNEL_TOKEN_DEFAULT_LENGTH) {
                 push = new WeiXinPush();
                 log.info("本次执行推送日志到企业微信");
             }
@@ -45,8 +45,8 @@ public class ServerPush {
             builder = builder.token(ftKey).chatId(chatId);
             push = new TelegramPush();
             log.info("本次执行推送日志到Telegram");
-        } 
-        
+        }
+
         if (null != push) {
             PushHelper.push(push, builder.build(), LoadFileResource.loadFile("/tmp/bili-helper.log"));
         } else {
