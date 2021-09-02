@@ -1,7 +1,6 @@
 package top.misec.task;
 
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import top.misec.login.ServerVerify;
 import top.misec.push.Push;
 import top.misec.push.PushHelper;
@@ -49,7 +48,7 @@ public class ServerPush {
         } 
         
         if (null != push) {
-            PushHelper.push(push, builder.build(), LoadFileResource.loadFile("/tmp/daily.log"));
+            PushHelper.push(push, builder.build(), LoadFileResource.loadFile("/tmp/bili-helper.log"));
         } else {
             log.info("未配置正确的ftKey和chatId,本次执行将不推送日志");
         }
