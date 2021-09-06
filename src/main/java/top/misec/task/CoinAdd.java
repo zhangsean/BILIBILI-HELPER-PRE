@@ -110,9 +110,9 @@ public class CoinAdd implements Task {
 
             addCoinOperateCount++;
             new VideoWatch().watchVideo(bvid);
+            new SleepTime().sleepDefault();
             boolean flag = coinAdd(bvid, 1, Config.getInstance().getSelectLike());
             if (flag) {
-                new SleepTime().sleepDefault();
                 needCoins--;
             }
             if (addCoinOperateCount > 15) {
