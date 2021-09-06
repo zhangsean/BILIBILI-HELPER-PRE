@@ -17,8 +17,6 @@ public class MangaRead implements Task {
 	@Override
 	public void run() {
 		String urlParam = "?device=pc&platform=web";
-		String requestBody = "comic_id=27355" +
-				"&ep_id=381662";
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("device", "pc");
 		jsonObject.addProperty("platform", "web");
