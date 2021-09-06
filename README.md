@@ -100,7 +100,7 @@ qq 群二维码
 
 ### 一、使用 腾讯云函数
 
-请参考[腾讯云函数部署](https://github.com/JunzhouLiu/BILIBILI-HELPER/blob/main/docs/scf.md)
+请参考[腾讯云函数部署](https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE/blob/main/docs/scf.md)
 
 ### 二、使用 Docker
 
