@@ -68,6 +68,7 @@ public class Config {
 				"是否跳过每日任务：" + skipDailyTask + "\n" +
 				"投币策略：" + coinAddPriority + "\n" +
 				"月底是否充电：" + monthEndAutoCharge + "\n" +
+				"充电对象：" + chargeForLove + "\n" +
 				"自定义充电日期：" + chargeDay + "号 \n" +
 				"每日投币数为：" + numberOfCoins + "\n" +
 				"分享时是否点赞：" + selectLike + "\n" +

@@ -22,8 +22,7 @@ public class UserCheck implements Task {
 
 	@Override
 	public void run() {
-		String requestPram = "";
-		JsonObject userJson = HttpUtil.doGet(ApiList.LOGIN + requestPram);
+		JsonObject userJson = HttpUtil.doGet(ApiList.LOGIN);
 		if (userJson == null) {
 			log.info("用户信息请求失败，如果是412错误，请在config.json中更换UA，412问题仅影响用户信息确认，不影响任务");
 		} else {
