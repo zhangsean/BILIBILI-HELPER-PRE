@@ -27,11 +27,11 @@ public class VersionInfo {
 
 	public static void printVersionInfo() {
 		initInfo();
-		log.debug("-----版本信息-----");
-		log.debug("当前版本: " + releaseVersion);
-		log.debug("版本更新内容: " + releaseInfo);
-		log.debug("最后更新日期: " + releaseDate);
-		log.debug("项目开源地址: " + projectRepo);
-		log.debug("-----版本信息-----\n");
+		log.info("-----版本信息-----");
+		log.info("当前版本: " + releaseVersion);
+		log.info("版本更新内容: " + releaseInfo);
+		log.info("最后更新日期: " + releaseDate);
+		log.info("项目开源地址: " + projectRepo);
+		log.info("-----版本信息-----\n");
 	}
 }

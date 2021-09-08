@@ -53,6 +53,8 @@ public class Config {
 	private Integer reserveCoins;
 	private Integer taskIntervalTime;
 
+	private Integer chargeDay;
+
 	private Config() {
 	}
 
@@ -66,6 +68,7 @@ public class Config {
 				"是否跳过每日任务：" + skipDailyTask + "\n" +
 				"投币策略：" + coinAddPriority + "\n" +
 				"月底是否充电：" + monthEndAutoCharge + "\n" +
+				"自定义充电日期：" + chargeDay + "号 \n" +
 				"每日投币数为：" + numberOfCoins + "\n" +
 				"分享时是否点赞：" + selectLike + "\n" +
 				"任务执行间隔时间：" + taskIntervalTime + "\n" +
@@ -161,6 +164,14 @@ public class Config {
 		if (config.getReserveCoins() != null) {
 			reserveCoins = config.getReserveCoins();
 		}
+
+		if (config.getChargeDay() != null) {
+			chargeDay = config.getChargeDay();
+			if (chargeDay > 28 || chargeDay < 1) {
+				chargeDay = 28;
+			}
+		}
+
 		if (config.getTaskIntervalTime() != null) {
 			taskIntervalTime = config.getTaskIntervalTime();
 			if (taskIntervalTime <= 0) {
