@@ -56,6 +56,7 @@ public class Config {
 	private Integer predictNumberOfCoins;
 	private Integer minimumNumberOfCoins;
 	private Boolean matchGame;
+	private Boolean showHandModel;
 
 	private Config() {
 	}
@@ -191,10 +192,13 @@ public class Config {
 
 		if (config.getPredictNumberOfCoins() != null) {
 			predictNumberOfCoins = config.getPredictNumberOfCoins();
-
 			if (predictNumberOfCoins > 10) {
 				predictNumberOfCoins = 10;
 			}
+		}
+
+		if (config.getShowHandModel() != null) {
+			showHandModel = config.getShowHandModel();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 {
   "matchGame": false,
+  "showHandModel": false,
   "predictNumberOfCoins": 15,
   "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 20,

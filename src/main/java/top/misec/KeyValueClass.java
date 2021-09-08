@@ -33,6 +33,7 @@ public class KeyValueClass {
 	private Integer predictNumberOfCoins;
 	private Integer minimumNumberOfCoins;
 	private Boolean matchGame;
+	private Boolean showHandModel;
 
 	@Override
 	public String toString() {

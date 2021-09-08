@@ -188,6 +188,7 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
 | Key                | Value                | 说明                                                                     |
 | ------------------ | -------------------- | ------------------------------------------------------------------------ |
 | matchGame   |  [false,true]            | 是否开启赛事预测。 |
+| showHandModel   |  [false,true]            | true ：压赔率高的，false：压赔率低的 |
 | predictNumberOfCoins   | 1-10           | 单次预测的硬币数量 |
 | minimumNumberOfCoins   | [1,无穷大]            | 预留的硬币数，低于此数量不执行赛事预测。 |
 | taskIntervalTime   | [1,无穷大]            | 任务之间的执行间隔,默认10秒,云函数用户不建议调整的太长，注意免费时长。 |
