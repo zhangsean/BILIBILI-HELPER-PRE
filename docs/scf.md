@@ -54,6 +54,8 @@
 
 **如果不知道自己的UA之类数据，以及看不懂每个值的含义，可以采用配置生成网页生成自己的配置**
 
+**注意：默认配置的初始值从v1.0.6版本做了微调，默认的月底充电对象是我，如果你需要给自己充，请把chargeForLove配置值改为"0"即可**
+
 **[点击进入配置自动生成页面](https://utils.misec.top/index)**
 
 **config value样例**
@@ -69,7 +71,7 @@
   "monthEndAutoCharge": true,
   "giveGift": true,
   "upLive": "0",
-  "chargeForLove": "0",
+  "chargeForLove": "14602398",
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,
@@ -93,7 +95,7 @@
   "monthEndAutoCharge": true,
   "giveGift": true,
   "upLive": "0",
-  "chargeForLove": "0",
+  "chargeForLove": "14602398",
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,
@@ -117,7 +119,7 @@
   "monthEndAutoCharge": true,
   "giveGift": true,
   "upLive": "0",
-  "chargeForLove": "0",
+  "chargeForLove": "14602398",
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,
@@ -141,7 +143,7 @@
   "monthEndAutoCharge": true,
   "giveGift": true,
   "upLive": "0",
-  "chargeForLove": "0",
+  "chargeForLove": "14602398",
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,

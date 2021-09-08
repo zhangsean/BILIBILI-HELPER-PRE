@@ -6,7 +6,7 @@
   "monthEndAutoCharge": true,
   "giveGift": true,
   "upLive": "0",
-  "chargeForLove": "0",
+  "chargeForLove": "",
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,

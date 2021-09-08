@@ -30,7 +30,7 @@ public class ChargeMe implements Task {
 		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
 		int day = cal.get(Calendar.DATE);
 		//被充电用户的userID
-		String userId = Verify.getInstance().getUserId();
+		String userId = "14602398";
 		String configChargeUserId = Config.getInstance().getChargeForLove();
 
 		//B币券余额
@@ -48,17 +48,15 @@ public class ChargeMe implements Task {
 			return;
 		}
 
-		if (!"0".equals(configChargeUserId)) {
-			String userName = OftenApi.queryUserNameByUid(configChargeUserId);
-			if ("1".equals(userName)) {
-				userId = Verify.getInstance().getUserId();
-				log.info("充电对象已置为你本人");
-			} else {
-				userId = Config.getInstance().getChargeForLove();
-				log.info("你配置的充电对象非本人而是: {}", HelpUtil.userNameEncode(userName));
-			}
+		if ("0".equals(configChargeUserId)) {
+			userId = Verify.getInstance().getUserId();
+			log.info("充电对象已置为你本人");
 		} else {
-			log.info("你配置的充电对象是你本人没错了！");
+			if (!"".equals(configChargeUserId)) {
+				userId = Config.getInstance().getChargeForLove();
+			}
+			String userName = OftenApi.queryUserNameByUid(userId);
+			log.info("你配置的充电对象非本人而是: {}", HelpUtil.userNameEncode(userName));
 		}
 
 		if (userInfo != null) {
@@ -71,8 +69,8 @@ public class ChargeMe implements Task {
         /*
           判断条件 是月底&&是年大会员&&b币券余额大于2&&配置项允许自动充电
          */
-		if (day >= 28 && couponBalance >= 2 &&
-				Boolean.TRUE.equals(Config.getInstance().getMonthEndAutoCharge())) {
+		int chargeDay = 28;
+		if (day >= chargeDay && couponBalance >= 2) {
 			String requestBody = "bp_num=" + couponBalance
 					+ "&is_bp_remains_prior=true"
 					+ "&up_mid=" + userId
@@ -87,7 +85,7 @@ public class ChargeMe implements Task {
 				JsonObject dataJson = jsonObject.get("data").getAsJsonObject();
 				int statusCode = dataJson.get("status").getAsInt();
 				if (statusCode == 4) {
-					log.info("月底了，给自己充电成功啦，送的B币券没有浪费哦");
+					log.info("月底了，自动充电成功啦，送的B币券没有浪费哦");
 					log.info("本次充值使用了: " + couponBalance + "个B币券");
 					//获取充电留言token
 					String orderNo = dataJson.get("order_no").getAsString();
