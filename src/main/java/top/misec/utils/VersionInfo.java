@@ -31,8 +31,9 @@ public class VersionInfo {
 
 		log.info("-----版本信息-----");
 		log.info("当前版本: " + releaseVersion);
-		log.info("最新版本为:{}", jsonObject.get("tag_name").getAsString().replaceAll("V", ""));
+		log.info("最新版本为: {}", jsonObject.get("tag_name").getAsString().replaceAll("V", ""));
 		log.info("最新版本更新内容: " + jsonObject.get("body"));
+		log.info("最近更新时间: {}", jsonObject.get("created_at"));
 		log.info("项目开源地址: " + projectRepo);
 	}
 }
