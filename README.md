@@ -157,6 +157,9 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
 
 ```json
 {
+  "matchGame": false,
+  "predictNumberOfCoins": 15,
+  "minimumNumberOfCoins": 30,
   "taskIntervalTime": 20,
   "numberOfCoins": 5,
   "reserveCoins": 10,
@@ -184,6 +187,9 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
 
 | Key                | Value                | 说明                                                                     |
 | ------------------ | -------------------- | ------------------------------------------------------------------------ |
+| matchGame   |  [false,true]            | 是否开启赛事预测。 |
+| predictNumberOfCoins   | 1-10           | 单次预测的硬币数量 |
+| minimumNumberOfCoins   | [1,无穷大]            | 预留的硬币数，低于此数量不执行赛事预测。 |
 | taskIntervalTime   | [1,无穷大]            | 任务之间的执行间隔,默认10秒,云函数用户不建议调整的太长，注意免费时长。 |
 | numberOfCoins      | [0,5]                | 每日投币数量,默认 5 ,为 0 时则不投币                                     |
 | reserveCoins       | [0,4000]             | 预留的硬币数，当硬币余额小于这个值时，不会进行投币任务，默认值为 50      |

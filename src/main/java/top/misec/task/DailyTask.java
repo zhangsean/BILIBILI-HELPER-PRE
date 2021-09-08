@@ -34,6 +34,7 @@ public class DailyTask {
 		dailyTasks.add(new GiveGift());
 		dailyTasks.add(new ChargeMe());
 		dailyTasks.add(new GetVipPrivilege());
+		dailyTasks.add(new MatchGame());
 		Collections.shuffle(dailyTasks);
 		dailyTasks.add(0, new UserCheck());
 		dailyTasks.add(1, new CoinLogs());

@@ -9,7 +9,7 @@ public interface Task {
 	/**
 	 * 任务实现
 	 */
-	void run();
+	void run() throws InterruptedException;
 
 	/**
 	 * 任务名

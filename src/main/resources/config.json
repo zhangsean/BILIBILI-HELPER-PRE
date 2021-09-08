@@ -1,4 +1,7 @@
 {
+  "matchGame": false,
+  "predictNumberOfCoins": 15,
+  "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 20,
   "numberOfCoins": 5,
   "reserveCoins": 10,

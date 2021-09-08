@@ -52,8 +52,10 @@ public class Config {
 	private String chargeForLove;
 	private Integer reserveCoins;
 	private Integer taskIntervalTime;
-
 	private Integer chargeDay;
+	private Integer predictNumberOfCoins = 15;
+	private Integer minimumNumberOfCoins = 30;
+	private Boolean matchGame;
 
 	private Config() {
 	}
@@ -177,6 +179,21 @@ public class Config {
 			taskIntervalTime = config.getTaskIntervalTime();
 			if (taskIntervalTime <= 0) {
 				taskIntervalTime = 1;
+			}
+		}
+
+		if (config.getMatchGame() != null) {
+			matchGame = config.matchGame;
+		}
+		if (config.getMinimumNumberOfCoins() != null) {
+			minimumNumberOfCoins = config.getMinimumNumberOfCoins();
+		}
+
+		if (config.getPredictNumberOfCoins() != null) {
+			predictNumberOfCoins = config.getPredictNumberOfCoins();
+
+			if (predictNumberOfCoins > 10) {
+				predictNumberOfCoins = 10;
 			}
 		}
 	}
