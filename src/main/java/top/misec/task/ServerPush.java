@@ -27,11 +27,7 @@ public class ServerPush {
 			if (ftKey.startsWith("https://oapi.dingtalk.com")) {
 				push = new DingTalkPush();
 				log.info("本次执行推送日志到钉钉");
-			} else if (ftKey.startsWith("SCU")) {
-				push = new ServerChanPush();
-				log.info("本次执行推送日志到Server酱");
-				log.info("Server酱旧版推送渠道即将下线，请前往[sct.ftqq.com](https://sct.ftqq.com/)使用Turbo版本的推送Key");
-			} else if (ftKey.startsWith("SCT")) {
+			}  else if (ftKey.startsWith("SCT")) {
 				push = new ServerChanTurboPush();
 				log.info("本次执行推送日志到Server酱Turbo版本");
 			} else if (ftKey.length() == PushPlusPush.PUSH_PLUS_CHANNEL_TOKEN_DEFAULT_LENGTH) {

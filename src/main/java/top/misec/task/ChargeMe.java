@@ -48,16 +48,19 @@ public class ChargeMe implements Task {
 			log.info("未开启月底给自己充电功能");
 			return;
 		}
-		if (day < Config.getInstance().getChargeDay()) {
-			log.info("今天是本月的第: " + day + "天，还没到充电日子呢");
-		}
 
 		if (userId.equals("0")||userId.equals("")) {
 			log.info("充电对象uid配置错误，请参考最新的文档");
+			return;
 		}
 
-		log.info("月底自动充电对象是: {}", HelpUtil.userNameEncode(userName));
+		if (day < Config.getInstance().getChargeDay()) {
+			log.info("今天是本月的第: " + day + "天，还没到充电日子呢");
+			return;
+		}
 
+
+		log.info("月底自动充电对象是: {}", HelpUtil.userNameEncode(userName));
 
 		if (userInfo != null) {
 			couponBalance = userInfo.getWallet().getCoupon_balance();
