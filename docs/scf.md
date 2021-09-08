@@ -60,28 +60,6 @@
 
 **dedeuserid sessdata biliJct 必填 获取方式见项目README**
 
-```json
-{
-  "taskIntervalTime": 10,
-  "numberOfCoins": 5,
-  "reserveCoins": 50,
-  "selectLike": 0,
-  "monthEndAutoCharge": true,
-  "giveGift": true,
-  "upLive": "0",
-  "chargeForLove": "14602398",
-  "devicePlatform": "ios",
-  "coinAddPriority": 1,
-  "skipDailyTask": false,
-  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15",
-  "dedeuserid": "",
-  "sessdata": "",
-  "biliJct": "",
-  "telegrambottoken": null,
-  "telegramchatid": null,
-  "serverpushkey": null
-}
-```
 
 样例1:使用TGbot推送,如果不使用tgbot请将`telegrambottoken`和`telegramchatid`的值改为`null`。
 
@@ -103,7 +81,6 @@
   "biliJct": "",
   "telegrambottoken": "0000000:aaaaaaaa",
   "telegramchatid": "123456",
-  "serverpushkey": null
 }
 ```
 样例2:使用SERVER酱的配置：
@@ -125,8 +102,6 @@
   "dedeuserid": "",
   "sessdata": "",
   "biliJct": "",
-  "telegrambottoken": null,
-  "telegramchatid": null,
   "serverpushkey": "申请的server酱的KEY"
 }
 ```
@@ -149,8 +124,6 @@
   "dedeuserid": "",
   "sessdata": "",
   "biliJct": "",
-  "telegrambottoken": null,
-  "telegramchatid": null,
   "serverpushkey": "https://oapi.dingtalk.com/robot/send?access_token=XXX"
 }
 ```
