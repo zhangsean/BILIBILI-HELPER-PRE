@@ -29,6 +29,10 @@ public class KeyValueClass {
 	private boolean skipDailyTask;
 	private String userAgent;
 	private int taskIntervalTime;
+	private Integer chargeDay;
+	private Integer predictNumberOfCoins;
+	private Integer minimumNumberOfCoins;
+	private Boolean matchGame;
 
 	@Override
 	public String toString() {

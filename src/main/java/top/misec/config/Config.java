@@ -53,8 +53,8 @@ public class Config {
 	private Integer reserveCoins;
 	private Integer taskIntervalTime;
 	private Integer chargeDay;
-	private Integer predictNumberOfCoins = 15;
-	private Integer minimumNumberOfCoins = 30;
+	private Integer predictNumberOfCoins;
+	private Integer minimumNumberOfCoins;
 	private Boolean matchGame;
 
 	private Config() {

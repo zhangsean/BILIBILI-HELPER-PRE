@@ -65,6 +65,10 @@
 
 ```json
 {
+  "matchGame": false,
+  "predictNumberOfCoins": 15,
+  "minimumNumberOfCoins": 1000,
+  "taskIntervalTime": 10,
   "numberOfCoins": 5,
   "reserveCoins": 50,
   "selectLike": 0,
@@ -87,6 +91,9 @@
 
 ```json
 {
+  "matchGame": false,
+  "predictNumberOfCoins": 15,
+  "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 10,
   "numberOfCoins": 5,
   "reserveCoins": 50,
@@ -109,6 +116,9 @@
 样例3:使用钉钉推送。
 ```json
 {
+  "matchGame": false,
+  "predictNumberOfCoins": 15,
+  "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 10,
   "numberOfCoins": 5,
   "reserveCoins": 50,
