@@ -16,9 +16,8 @@ BILIBILI-HELPER
 
 ## 工具简介
 
-
-这是一个利用 Linux Crontab ,云函数， Docker 等方式实现哔哩哔哩（Bilibili）每日任务投币，点赞，分享视频，直播签到，银瓜子兑换硬币，漫画每日签到，简单配置即可每日轻松获取 65 经验值，快来和我一起成为
-Lv6 吧\~\~\~\~
+这是一个利用 Linux Crontab ,云函数， Docker 等方式实现哔哩哔哩（Bilibili）每日任务投币，点赞，分享视频，直播签到，银瓜子兑换硬币，漫画每日签到，简单配置即可每日轻松获取 65 经验值，快来和我一起成为 Lv6
+吧\~\~\~\~
 
 **如果觉得好用，顺手点个 Star 吧 ❤**
 
@@ -63,23 +62,23 @@ qq 群二维码
 # 目录
 
 - [目录](#目录)
-  - [使用说明](#使用说明)
-    - [获取运行所需的 Cookies](#获取运行所需的-cookies)
-    - [一、使用 腾讯云函数](#一使用-腾讯云函数)
-    - [二、使用 Docker](#二使用-docker)
-    - [三、使用 Linux Crontab 方式](#三使用-linux-crontab-方式)
-    - [自定义功能配置](#自定义功能配置)
-  - [订阅执行结果](#订阅执行结果)
-    - [Server 酱 Turbo 版](#server-酱-turbo-版)
-    - [Telegram 订阅执行结果](#telegram-订阅执行结果)
-    - [钉钉机器人](#钉钉机器人)
-    - [PushPlus(Push+)](#pushpluspush)
-  - [免责声明](#免责声明)
-  - [API 参考列表](#api-参考列表)
-  - [基于本项目的衍生项目](#基于本项目的衍生项目)
-  - [致谢](#致谢)
-  - [License](#license)
-  - [Stargazers over time](#stargazers-over-time)
+    - [使用说明](#使用说明)
+        - [获取运行所需的 Cookies](#获取运行所需的-cookies)
+        - [一、使用 腾讯云函数](#一使用-腾讯云函数)
+        - [二、使用 Docker](#二使用-docker)
+        - [三、使用 Linux Crontab 方式](#三使用-linux-crontab-方式)
+        - [自定义功能配置](#自定义功能配置)
+    - [订阅执行结果](#订阅执行结果)
+        - [Server 酱 Turbo 版](#server-酱-turbo-版)
+        - [Telegram 订阅执行结果](#telegram-订阅执行结果)
+        - [钉钉机器人](#钉钉机器人)
+        - [PushPlus(Push+)](#pushpluspush)
+    - [免责声明](#免责声明)
+    - [API 参考列表](#api-参考列表)
+    - [基于本项目的衍生项目](#基于本项目的衍生项目)
+    - [致谢](#致谢)
+    - [License](#license)
+    - [Stargazers over time](#stargazers-over-time)
 
 ## 使用说明
 
@@ -93,7 +92,6 @@ qq 群二维码
 
 ![图示](docs/IMG/20201012001307.png)
 
-
 ### 一、使用 腾讯云函数
 
 请参考[腾讯云函数部署](https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE/blob/main/docs/scf.md)
@@ -105,7 +103,6 @@ qq 群二维码
 - **基于本项目的 docker 封装项目：[SuperNG6/docker-bilibili-helper](https://github.com/SuperNG6/docker-bilibili-helper)**
 
 - **基于本项目的 docker 镜像：[superng6/bilibili-helper](https://hub.docker.com/r/superng6/bilibili-helper)**
-
 
 ### 三、使用 Linux Crontab 方式
 
@@ -122,6 +119,7 @@ wget https://raw.githubusercontent.com/JunzhouLiu/BILIBILI-HELPER-PRE/main/setup
    请记得`source /etc/profile`和`source ~/.bashrc`,建议直接使用仓库提供的[`start.sh`][31]脚本,注意修改脚本的 jar 包路径和 cookies 参数。
 
 [30]: https://github.com/JunzhouLiu/BILIBILI-HELPER/releases/latest
+
 [31]: https://github.com/JunzhouLiu/BILIBILI-HELPER/blob/main/start.sh
 
 **crontab 命令示例**
@@ -158,8 +156,9 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
 ```json
 {
   "matchGame": false,
-  "predictNumberOfCoins": 15,
-  "minimumNumberOfCoins": 30,
+  "showHandModel": false,
+  "predictNumberOfCoins": 1,
+  "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 20,
   "numberOfCoins": 5,
   "reserveCoins": 10,
@@ -168,14 +167,13 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
   "giveGift": true,
   "upLive": "0",
   "chargeForLove": "14602398",
-  "chargeDay": "28",
+  "chargeDay": 28,
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,
   "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
 }
 ```
-
 
 **如果不知道自己的UA之类数据，以及看不懂每个值的含义，可以采用配置生成网页生成自己的配置，注意jar方式和docker方式运行无需填写cookies相关信息**
 
@@ -189,7 +187,7 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
 | ------------------ | -------------------- | ------------------------------------------------------------------------ |
 | matchGame   |  [false,true]            | 是否开启赛事预测。 |
 | showHandModel   |  [false,true]            | true ：压赔率高的，false：压赔率低的 |
-| predictNumberOfCoins   | 1-10           | 单次预测的硬币数量 |
+| predictNumberOfCoins   | 1-10           | 单次预测的硬币数量,默认为1 |
 | minimumNumberOfCoins   | [1,无穷大]            | 预留的硬币数，低于此数量不执行赛事预测。 |
 | taskIntervalTime   | [1,无穷大]            | 任务之间的执行间隔,默认10秒,云函数用户不建议调整的太长，注意免费时长。 |
 | numberOfCoins      | [0,5]                | 每日投币数量,默认 5 ,为 0 时则不投币                                     |
@@ -207,8 +205,8 @@ java -jar /home/BILIBILI-HELPER.jar DEDEUSERID SESSDATA BILI_JCT SCKEY >> /var/l
 
 - **tips:从1.0.0版本开始，随机视频投币有一定的概率会将硬币投给本项目的开发者。**
 - **默认配置文件是给开发者充电，给自己充电或者给其他up充电，请改为对应的uid**
-- 
-  userAgent 可选参数列表
+-
+userAgent 可选参数列表
 
 | 平台      | 浏览器         | userAgent                                                                                                                           |
 | --------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -243,7 +241,9 @@ _投币数量代码做了处理，如果本日投币不能获得经验了，则�
 4. 推送效果展示
    ![图示](docs/IMG/wechatMsgPush.png)
 
-**旧版推送渠道[sc.ftqq.com](http://sc.ftqq.com/9.version0) 即将与 4 月底下线，请前往[sct.ftqq.com](https://sct.ftqq.com/sendkey)生成`Turbo`版本的`Key`，注意，申请 Turbo 版 Key 后请配置消息通道，如果想沿用以前的推送方式，选择方糖服务号即可**
+**旧版推送渠道[sc.ftqq.com](http://sc.ftqq.com/9.version0) 即将与 4
+月底下线，请前往[sct.ftqq.com](https://sct.ftqq.com/sendkey)生成`Turbo`版本的`Key`，注意，申请 Turbo 版 Key
+后请配置消息通道，如果想沿用以前的推送方式，选择方糖服务号即可**
 
 ### Telegram 订阅执行结果
 

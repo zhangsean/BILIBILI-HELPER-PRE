@@ -1,6 +1,7 @@
 package top.misec.config;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import top.misec.utils.GsonUtils;
@@ -18,6 +19,13 @@ import top.misec.utils.LoadFileResource;
 public class TaskConfig {
 
     private static TaskConfig taskConfig;
+    private static String defaultConfig;
+
+    static {
+        defaultConfig = LoadFileResource.loadJsonFromAsset("config.json");
+        taskConfig = GsonUtils.fromJson(defaultConfig, TaskConfig.class);
+    }
+
     private Integer numberOfCoins;
     private Integer selectLike;
     private Boolean monthEndAutoCharge;
@@ -37,13 +45,6 @@ public class TaskConfig {
     private Boolean showHandModel;
 
     private TaskConfig() {
-        chargeDay = 28;
-        taskIntervalTime = 10;
-        predictNumberOfCoins = 1;
-        showHandModel = false;
-        matchGame = false;
-        monthEndAutoCharge = false;
-        minimumNumberOfCoins = 1000;
     }
 
     public static TaskConfig getInstance() {
@@ -61,50 +62,22 @@ public class TaskConfig {
 
     /**
      * 优先从jar包同级目录读取.
-     * 读取配置文件 src/main/resources/config.json
      */
     public void configInit() {
-        String configJson = LoadFileResource.loadJsonFromAsset("config.json");
-        configJson = resolveOriginConfig(configJson);
-        if (configJson != null) {
-            log.debug("读取初始化配置文件成功");
-            mergeConfig(GsonUtils.fromJson(configJson, TaskConfig.class));
-        }
-
-        configJson = LoadFileResource.loadConfigJsonFromFile();
-        configJson = resolveOriginConfig(configJson);
-        if (configJson != null) {
-            log.debug("读取外部配置文件成功");
-            mergeConfig(GsonUtils.fromJson(configJson, TaskConfig.class));
+        String customConfig = LoadFileResource.loadConfigJsonFromFile();
+        if (customConfig != null) {
+            log.info("读取外部自定义配置文件成功,若部分配置项不存在则会采用默认配置\n{}", customConfig);
+            mergeConfig(GsonUtils.fromJson(customConfig, TaskConfig.class));
+        } else {
+            log.info("未扫描到外部配置文件,使用默认配置文件\n{}", defaultConfig);
         }
         validationConfig();
         HttpUtil.setUserAgent(userAgent);
-        log.info(toString());
     }
 
-    private String resolveOriginConfig(String originConfig) {
-        if (originConfig == null) {
-            return null;
-        }
-        /*
-         *兼容旧配置文件.
-         * "skipDailyTask": 0 -> "skipDailyTask": false.
-         * "skipDailyTask": 1 -> "skipDailyTask": true.
-         */
-        String target0 = "\"skipDailyTask\": 0";
-        String target1 = "\"skipDailyTask\": 1";
-        if (originConfig.contains(target0)) {
-            log.debug("兼容旧配置文件，skipDailyTask的值由0变更为false");
-            return originConfig.replaceAll(target0, "\"skipDailyTask\": false");
-        } else if (originConfig.contains(target1)) {
-            log.debug("兼容旧配置文件，skipDailyTask的值由1变更为true");
-            return originConfig.replaceAll(target1, "\"skipDailyTask\": true");
-        } else {
-            log.debug("使用的是最新格式的配置文件，无需执行兼容性转换");
-            return originConfig;
-        }
-    }
-
+    /**
+     * 使用自定义文件时校验相关值.
+     */
     private void validationConfig() {
         chargeDay = chargeDay > 28 || chargeDay < 1 ? 28 : chargeDay;
         taskIntervalTime = taskIntervalTime <= 0 ? 1 : taskIntervalTime;
@@ -113,6 +86,6 @@ public class TaskConfig {
     }
 
     private void mergeConfig(TaskConfig config) {
-        BeanUtil.copyProperties(config, taskConfig);
+        BeanUtil.copyProperties(config, taskConfig, new CopyOptions().setIgnoreNullValue(true));
     }
 }

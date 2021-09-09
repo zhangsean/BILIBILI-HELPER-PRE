@@ -34,7 +34,7 @@ public class LoadFileResource {
             is.close();
             config = new String(buffer, StandardCharsets.UTF_8);
         } catch (FileNotFoundException e) {
-            log.info("未扫描到外部配置文件，即将加载默认配置文件【此提示仅针自行部署的Linux用户，普通用户请忽略】");
+            log.debug("未扫描到外部配置文件");
         } catch (IOException e) {
             log.debug(e);
         }

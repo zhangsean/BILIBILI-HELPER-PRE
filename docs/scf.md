@@ -66,7 +66,8 @@
 ```json
 {
   "matchGame": false,
-  "predictNumberOfCoins": 15,
+  "showHandModel": false,
+  "predictNumberOfCoins": 1,
   "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 10,
   "numberOfCoins": 5,
@@ -92,7 +93,8 @@
 ```json
 {
   "matchGame": false,
-  "predictNumberOfCoins": 15,
+  "showHandModel": false,
+  "predictNumberOfCoins": 1,
   "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 10,
   "numberOfCoins": 5,
@@ -117,7 +119,8 @@
 ```json
 {
   "matchGame": false,
-  "predictNumberOfCoins": 15,
+  "showHandModel": false,
+  "predictNumberOfCoins": 1,
   "minimumNumberOfCoins": 1000,
   "taskIntervalTime": 10,
   "numberOfCoins": 5,
