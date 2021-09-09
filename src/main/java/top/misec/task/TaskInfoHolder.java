@@ -55,9 +55,7 @@ public class TaskInfoHolder {
      * 此功能依赖UserCheck.
      *
      * @return 返回会员类型.
-     * 0:无会员（会员过期，当前不是会员）.
-     * 1:月会员.
-     * 2:年会员.
+     * 0:无会员（会员过期，当前不是会员）. 1:月会员. 2:年会员.
      */
     public static int queryVipStatusType() {
         if (userInfo == null) {

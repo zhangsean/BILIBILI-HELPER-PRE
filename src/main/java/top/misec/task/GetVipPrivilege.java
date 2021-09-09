@@ -55,8 +55,8 @@ public class GetVipPrivilege implements Task {
                   @happy888888:好像也可以getAsString或,getAsShort
                   @JunzhouLiu:Int比较好判断
                  */
-                int amount = jsonObject.get("data").getAsJsonObject().get("amount").getAsInt();
-                log.info("大会员成功领取{}张漫读劵", amount);
+                int num = jsonObject.get("data").getAsJsonObject().get("amount").getAsInt();
+                log.info("大会员成功领取{}张漫读劵", num);
             } else {
                 log.info("大会员领取漫读劵失败，原因为:{}", jsonObject.get("msg").getAsString());
             }

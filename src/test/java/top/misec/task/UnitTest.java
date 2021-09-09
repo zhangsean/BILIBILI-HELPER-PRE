@@ -1,7 +1,10 @@
 package top.misec.task;
 
+import com.google.gson.Gson;
+
 import lombok.extern.log4j.Log4j2;
-import top.misec.config.TaskConfig;
+import top.misec.KeyValueClass;
+import top.misec.config.ConfigLoader;
 import top.misec.login.ServerVerify;
 import top.misec.login.Verify;
 import top.misec.utils.VersionInfo;
@@ -31,7 +34,9 @@ public class UnitTest {
         //每日任务65经验
 
         //初始化配置
-        TaskConfig.getInstance().configInit();
+        ConfigLoader.configInit();
+
+        KeyValueClass kv = new Gson().fromJson(ConfigLoader.getDefaultConfig(), KeyValueClass.class);
 
 
         ServerPush.doServerPush();

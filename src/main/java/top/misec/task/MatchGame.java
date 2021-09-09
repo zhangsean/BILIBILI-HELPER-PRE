@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
-import top.misec.config.TaskConfig;
+import top.misec.config.ConfigLoader;
 import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 import top.misec.utils.SleepTime;
@@ -27,13 +27,13 @@ public class MatchGame implements Task {
 
     @Override
     public void run() {
-        if (!TaskConfig.getInstance().getMatchGame()) {
+        if (!ConfigLoader.getTaskConfig().getMatchGame()) {
             log.info("赛事预测未开启");
             return;
         }
 
-        if (OftenApi.getCoinBalance() < TaskConfig.getInstance().getMinimumNumberOfCoins()) {
-            log.info("{}个硬币都没有，参加什么预测呢？任务结束", TaskConfig.getInstance().getMinimumNumberOfCoins());
+        if (OftenApi.getCoinBalance() < ConfigLoader.getTaskConfig().getMinimumNumberOfCoins()) {
+            log.info("{}个硬币都没有，参加什么预测呢？任务结束", ConfigLoader.getTaskConfig().getMinimumNumberOfCoins());
             return;
         }
         JsonObject resultJson = queryContestQuestion(getTime(), 1, 50);
@@ -46,14 +46,14 @@ public class MatchGame implements Task {
                 return;
             }
             if (list != null) {
-                int coinNumber = TaskConfig.getInstance().getPredictNumberOfCoins();
+                int coinNumber = ConfigLoader.getTaskConfig().getPredictNumberOfCoins();
                 int contestId;
                 String contestName;
                 int questionId;
                 String questionTitle;
                 int teamId;
                 String teamName;
-                int seasonId;
+                //   int seasonId;
                 String seasonName;
                 for (JsonElement listinfo : list) {
                     log.info("-----预测开始-----");
@@ -63,7 +63,7 @@ public class MatchGame implements Task {
                     contestName = contestJson.get("game_stage").getAsString();
                     questionId = questionJson.get("id").getAsInt();
                     questionTitle = questionJson.get("title").getAsString();
-                    seasonId = contestJson.get("season").getAsJsonObject().get("id").getAsInt();
+                    //seasonId = contestJson.get("season").getAsJsonObject().get("id").getAsInt();
                     seasonName = contestJson.get("season").getAsJsonObject().get("title").getAsString();
 
                     log.info("{} {}:{}", seasonName, contestName, questionTitle);
@@ -76,7 +76,7 @@ public class MatchGame implements Task {
                     JsonObject teamB = questionJson.get("details").getAsJsonArray().get(1).getAsJsonObject();
                     log.info("当前赔率为:  {}:{}", teamA.get("odds").getAsDouble(), teamB.get("odds").getAsDouble());
 
-                    if (TaskConfig.getInstance().getShowHandModel()) {
+                    if (ConfigLoader.getTaskConfig().getShowHandModel()) {
                         if (teamA.get("odds").getAsDouble() <= teamB.get("odds").getAsDouble()) {
                             teamId = teamB.get("detail_id").getAsInt();
                             teamName = teamB.get("option").getAsString();
@@ -106,8 +106,8 @@ public class MatchGame implements Task {
     private JsonObject queryContestQuestion(String today, int pn, int ps) {
         String gid = "";
         String sids = "";
-        String urlParam = "?pn=" + pn +
-                "&ps=" + ps
+        String urlParam = "?pn=" + pn
+                + "&ps=" + ps
                 + "&gid=" + gid
                 + "&sids=" + sids
                 + "&stime=" + today + URLEncoder.encode(" 00:00:00")
@@ -120,8 +120,8 @@ public class MatchGame implements Task {
     }
 
     private void doPrediction(int oid, int main_id, int detail_id, int count) {
-        String requestbody = "oid=" + oid +
-                "&main_id=" + main_id
+        String requestbody = "oid=" + oid
+                + "&main_id=" + main_id
                 + "&detail_id=" + detail_id
                 + "&count=" + count
                 + "&is_fav=0"

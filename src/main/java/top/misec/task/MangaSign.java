@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
-import top.misec.config.TaskConfig;
+import top.misec.config.ConfigLoader;
 import top.misec.utils.HttpUtil;
 
 /**
@@ -19,7 +19,7 @@ public class MangaSign implements Task {
     @Override
     public void run() {
 
-        String platform = TaskConfig.getInstance().getDevicePlatform();
+        String platform = ConfigLoader.getTaskConfig().getDevicePlatform();
         String requestBody = "platform=" + platform;
         JsonObject result = HttpUtil.doPost(ApiList.MANGA, requestBody);
 

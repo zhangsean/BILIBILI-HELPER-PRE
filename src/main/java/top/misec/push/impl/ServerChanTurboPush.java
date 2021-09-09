@@ -9,7 +9,7 @@ import top.misec.push.AbstractPush;
 import top.misec.push.model.PushMetaInfo;
 
 /**
- * Turbo版本server酱推送
+ * Turbo版本server酱推送.
  *
  * @author itning
  * @since 2021/3/22 17:14

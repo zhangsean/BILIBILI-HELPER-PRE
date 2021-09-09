@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import top.misec.config.TaskConfig;
+import top.misec.config.ConfigLoader;
 import top.misec.login.ServerVerify;
 import top.misec.login.Verify;
 import top.misec.org.slf4j.impl.StaticLoggerBinder;
@@ -59,8 +59,8 @@ public class BiliMain {
 
         VersionInfo.printVersionInfo();
         //每日任务65经验
-        TaskConfig.getInstance().configInit();
-        if (!Boolean.TRUE.equals(TaskConfig.getInstance().getSkipDailyTask())) {
+        ConfigLoader.configInit();
+        if (!Boolean.TRUE.equals(ConfigLoader.getTaskConfig().getSkipDailyTask())) {
             DailyTask dailyTask = new DailyTask();
             dailyTask.doDailyTask();
         } else {
@@ -99,8 +99,8 @@ public class BiliMain {
 
         VersionInfo.printVersionInfo();
         //每日任务65经验
-        TaskConfig.getInstance().configInit(new Gson().toJson(kv));
-        if (!Boolean.TRUE.equals(TaskConfig.getInstance().getSkipDailyTask())) {
+        ConfigLoader.configInit(new Gson().toJson(kv));
+        if (!Boolean.TRUE.equals(ConfigLoader.getTaskConfig().getSkipDailyTask())) {
             DailyTask dailyTask = new DailyTask();
             dailyTask.doDailyTask();
         } else {

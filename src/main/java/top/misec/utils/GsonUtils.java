@@ -162,7 +162,7 @@ public class GsonUtils {
     /**
      * 创建一个泛型参数type.
      *
-     * @param raw  外层对象（List<T>/Map<K,V>/Result<T>等）
+     * @param raw  外层对象（List<T> Map<K,V> Result<T>等）
      * @param args 泛型对应的type
      * @return ParameterizedType
      */

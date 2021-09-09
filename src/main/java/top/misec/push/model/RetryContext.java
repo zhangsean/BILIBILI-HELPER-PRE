@@ -3,11 +3,13 @@ package top.misec.push.model;
 import java.util.concurrent.TimeUnit;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * @author itning
  * @since 2021/3/22 17:25
  */
+@Log4j2
 @Getter
 public class RetryContext {
 
@@ -53,7 +55,8 @@ public class RetryContext {
         if (retryInterval > 0) {
             try {
                 TimeUnit.MILLISECONDS.sleep(retryInterval);
-            } catch (InterruptedException ignored) {
+            } catch (InterruptedException e) {
+                log.debug(e);
             }
         }
         return true;

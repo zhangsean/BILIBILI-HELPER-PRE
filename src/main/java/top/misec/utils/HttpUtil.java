@@ -44,9 +44,9 @@ public class HttpUtil {
             .setConnectionRequestTimeout(5000)
             .setSocketTimeout(10000)
             .build();
-    static Verify verify = Verify.getInstance();
-    private static String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) " +
-            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.54";
+    private static Verify verify = Verify.getInstance();
+    private static String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) "
+            + "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.54";
     private static CloseableHttpClient httpClient = null;
     private static CloseableHttpResponse httpResponse = null;
 
@@ -105,9 +105,6 @@ public class HttpUtil {
         return resultJson;
     }
 
-    public static JsonObject doGet(String url) {
-        return doGet(url, new JsonObject());
-    }
 
     private static NameValuePair getNameValuePair(Map.Entry<String, JsonElement> entry) {
         return new BasicNameValuePair(entry.getKey(), Optional.ofNullable(entry.getValue()).map(Object::toString).orElse(null));
@@ -115,6 +112,10 @@ public class HttpUtil {
 
     public static NameValuePair[] getPairList(JsonObject pJson) {
         return pJson.entrySet().parallelStream().map(HttpUtil::getNameValuePair).toArray(NameValuePair[]::new);
+    }
+
+    public static JsonObject doGet(String url) {
+        return doGet(url, new JsonObject());
     }
 
     public static JsonObject doGet(String url, JsonObject pJson) {

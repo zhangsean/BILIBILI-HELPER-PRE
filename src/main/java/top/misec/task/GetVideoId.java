@@ -142,7 +142,7 @@ public class GetVideoId {
         if (jsonArray != null) {
             for (JsonElement videoInfo : jsonArray) {
                 String bvid = videoInfo.getAsJsonObject().get("bvid").getAsString();
-                int play = videoInfo.getAsJsonObject().get("play").getAsInt();
+                // int play = videoInfo.getAsJsonObject().get("play").getAsInt();
                 if (!CoinAdd.isCoinAdded(bvid)) {
                     this.rankVideoList.add(bvid);
                     this.followUpVideoList.add(bvid);

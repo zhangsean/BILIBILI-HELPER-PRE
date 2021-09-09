@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 
 import lombok.extern.log4j.Log4j2;
 import top.misec.config.TaskConfig;
+import top.misec.config.ConfigLoader;
 import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 
@@ -21,13 +22,13 @@ public class GiveGift implements Task {
     /**
      * 获取日志记录器对象.
      */
-    TaskConfig config = TaskConfig.getInstance();
+    TaskConfig taskConfig = ConfigLoader.getTaskConfig();
 
     @Override
     public void run() {
         try {
             /* 从配置类中读取是否需要执行赠送礼物 */
-            if (!Boolean.TRUE.equals(config.getGiveGift())) {
+            if (!Boolean.TRUE.equals(taskConfig.getGiveGift())) {
                 log.info("未开启自动送出即将过期礼物功能");
                 return;
             }
@@ -54,11 +55,11 @@ public class GiveGift implements Task {
                         roomId = uidAndRid.get("roomid").getAsString();
                     }
 
-                    String requestBody = "biz_id=" + roomId +
-                            "&ruid=" + uid +
-                            "&bag_id=" + json.get("bag_id") +
-                            "&gift_id=" + json.get("gift_id") +
-                            "&gift_num=" + json.get("gift_num");
+                    String requestBody = "biz_id=" + roomId
+                            + "&ruid=" + uid
+                            + "&bag_id=" + json.get("bag_id")
+                            + "&gift_id=" + json.get("gift_id")
+                            + "&gift_num=" + json.get("gift_num");
                     JsonObject jsonObject3 = xliveBagSend(requestBody);
                     if ("0".equals(jsonObject3.get("code").getAsString())) {
                         /* 礼物的名字 */
@@ -155,15 +156,13 @@ public class GiveGift implements Task {
      * @since 2020-10-13
      */
     public JsonObject xliveBagSend(String requestBody) {
-
-        requestBody += "&uid=" + Verify.getInstance().getUserId() +
-                "&csrf=" + Verify.getInstance().getBiliJct() +
-                "&send_ruid=" + "0" +
-                "&storm_beat_id=" + "0" +
-                "&price=" + "0" +
-                "&platform=" + "pc" +
-                "&biz_code=" + "live";
-
+        requestBody += "&uid=" + Verify.getInstance().getUserId()
+                + "&csrf=" + Verify.getInstance().getBiliJct()
+                + "&send_ruid=" + "0"
+                + "&storm_beat_id=" + "0"
+                + "&price=" + "0"
+                + "&platform=" + "pc"
+                + "&biz_code=" + "live";
         return HttpUtil.doPost("https://api.live.bilibili.com/gift/v2/live/bag_send", requestBody);
     }
 
@@ -179,9 +178,9 @@ public class GiveGift implements Task {
         String roomId;
         /* 直播间 uid 即 up 的 id*/
         String uid;
-        if (!"0".equals(config.getUpLive())) {
+        if (!"0".equals(taskConfig.getUpLive())) {
             /* 获取指定up的id */
-            uid = config.getUpLive();
+            uid = taskConfig.getUpLive();
             roomId = getRoomInfoOld(uid);
             String status = "0";
             if (status.equals(roomId)) {
