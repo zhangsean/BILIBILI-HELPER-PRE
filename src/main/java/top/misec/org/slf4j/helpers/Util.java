@@ -13,8 +13,9 @@ public class Util {
     }
 
     public static String safeGetSystemProperty(String key) {
-        if (key == null)
+        if (key == null) {
             throw new IllegalArgumentException("null input");
+        }
 
         String result = null;
         try {
@@ -27,18 +28,19 @@ public class Util {
 
     public static boolean safeGetBooleanSystemProperty(String key) {
         String value = safeGetSystemProperty(key);
-        if (value == null)
+        if (value == null) {
             return false;
-        else
+        } else {
             return value.equalsIgnoreCase("true");
+        }
     }
 
     private static ClassContextSecurityManager getSecurityManager() {
-        if (SECURITY_MANAGER != null)
+        if (SECURITY_MANAGER != null) {
             return SECURITY_MANAGER;
-        else if (SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED)
+        } else if (SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED) {
             return null;
-        else {
+        } else {
             SECURITY_MANAGER = safeCreateSecurityManager();
             SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED = true;
             return SECURITY_MANAGER;
@@ -60,16 +62,18 @@ public class Util {
      */
     public static Class<?> getCallingClass() {
         ClassContextSecurityManager securityManager = getSecurityManager();
-        if (securityManager == null)
+        if (securityManager == null) {
             return null;
+        }
         Class<?>[] trace = securityManager.getClassContext();
         String thisClassName = Util.class.getName();
 
         // Advance until Util is found
         int i;
         for (i = 0; i < trace.length; i++) {
-            if (thisClassName.equals(trace[i].getName()))
+            if (thisClassName.equals(trace[i].getName())) {
                 break;
+            }
         }
 
         // trace[i] = Util; trace[i+1] = caller; trace[i+2] = caller's caller
@@ -83,7 +87,7 @@ public class Util {
     static final public void report(String msg, Throwable t) {
         System.err.println(msg);
         System.err.println("Reported exception:");
-        t.printStackTrace();
+        System.out.printf(t.toString());
     }
 
     static final public void report(String msg) {

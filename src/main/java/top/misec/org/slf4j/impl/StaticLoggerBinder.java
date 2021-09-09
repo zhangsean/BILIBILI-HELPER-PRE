@@ -44,9 +44,8 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 
     public enum LogImpl {
         /**
-         * 日志.
+         * 日志 .
          */
-        JUL,
-        LOG4J2
+        JUL, LOG4J2
     }
 }
