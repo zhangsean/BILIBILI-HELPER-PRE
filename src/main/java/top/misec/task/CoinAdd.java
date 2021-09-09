@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
-import top.misec.config.Config;
+import top.misec.config.TaskConfig;
 import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 import top.misec.utils.SleepTime;
@@ -53,14 +53,14 @@ public class CoinAdd implements Task {
         //安全检查，最多投币数
         final int maxNumberOfCoins = 5;
         //获取自定义配置投币数 配置写在src/main/resources/config.json中
-        int setCoin = Config.getInstance().getNumberOfCoins();
+        int setCoin = TaskConfig.getInstance().getNumberOfCoins();
         // 预留硬币数
-        int reserveCoins = Config.getInstance().getReserveCoins();
+        int reserveCoins = TaskConfig.getInstance().getReserveCoins();
 
         //已投的硬币
         int useCoin = TaskInfoHolder.expConfirm();
         //投币策略
-        int coinAddPriority = Config.getInstance().getCoinAddPriority();
+        int coinAddPriority = TaskConfig.getInstance().getCoinAddPriority();
 
         if (setCoin > maxNumberOfCoins) {
             log.info("自定义投币数为: {}枚,为保护你的资产，自定义投币数重置为: " + maxNumberOfCoins + "枚", setCoin);
@@ -112,7 +112,7 @@ public class CoinAdd implements Task {
             addCoinOperateCount++;
             new VideoWatch().watchVideo(bvid);
             new SleepTime().sleepDefault();
-            boolean flag = coinAdd(bvid, 1, Config.getInstance().getSelectLike());
+            boolean flag = coinAdd(bvid, 1, TaskConfig.getInstance().getSelectLike());
             if (flag) {
                 needCoins--;
             }

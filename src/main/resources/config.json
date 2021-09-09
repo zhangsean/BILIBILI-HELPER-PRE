@@ -11,7 +11,7 @@
   "giveGift": true,
   "upLive": "0",
   "chargeForLove": "14602398",
-  "chargeDay": "28",
+  "chargeDay": 28,
   "devicePlatform": "ios",
   "coinAddPriority": 1,
   "skipDailyTask": false,

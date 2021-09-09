@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
-import top.misec.config.Config;
+import top.misec.config.TaskConfig;
 import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 import top.misec.utils.SleepTime;
@@ -27,13 +27,13 @@ public class MatchGame implements Task {
 
     @Override
     public void run() {
-        if (!Config.getInstance().getMatchGame()) {
+        if (!TaskConfig.getInstance().getMatchGame()) {
             log.info("赛事预测未开启");
             return;
         }
 
-        if (OftenApi.getCoinBalance() < Config.getInstance().getMinimumNumberOfCoins()) {
-            log.info("{}个硬币都没有，参加什么预测呢？任务结束", Config.getInstance().getMinimumNumberOfCoins());
+        if (OftenApi.getCoinBalance() < TaskConfig.getInstance().getMinimumNumberOfCoins()) {
+            log.info("{}个硬币都没有，参加什么预测呢？任务结束", TaskConfig.getInstance().getMinimumNumberOfCoins());
             return;
         }
         JsonObject resultJson = queryContestQuestion(getTime(), 1, 50);
@@ -46,7 +46,7 @@ public class MatchGame implements Task {
                 return;
             }
             if (list != null) {
-                int coinNumber = Config.getInstance().getPredictNumberOfCoins();
+                int coinNumber = TaskConfig.getInstance().getPredictNumberOfCoins();
                 int contestId;
                 String contestName;
                 int questionId;
@@ -76,7 +76,7 @@ public class MatchGame implements Task {
                     JsonObject teamB = questionJson.get("details").getAsJsonArray().get(1).getAsJsonObject();
                     log.info("当前赔率为:  {}:{}", teamA.get("odds").getAsDouble(), teamB.get("odds").getAsDouble());
 
-                    if (Config.getInstance().getShowHandModel()) {
+                    if (TaskConfig.getInstance().getShowHandModel()) {
                         if (teamA.get("odds").getAsDouble() <= teamB.get("odds").getAsDouble()) {
                             teamId = teamB.get("detail_id").getAsInt();
                             teamName = teamB.get("option").getAsString();

@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import lombok.extern.log4j.Log4j2;
-import top.misec.config.Config;
+import top.misec.config.TaskConfig;
 import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 
@@ -21,7 +21,7 @@ public class GiveGift implements Task {
     /**
      * 获取日志记录器对象.
      */
-    Config config = Config.getInstance();
+    TaskConfig config = TaskConfig.getInstance();
 
     @Override
     public void run() {

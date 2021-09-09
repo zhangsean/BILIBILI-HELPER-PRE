@@ -3,7 +3,7 @@ package top.misec.utils;
 import java.util.Random;
 
 import lombok.extern.log4j.Log4j2;
-import top.misec.config.Config;
+import top.misec.config.TaskConfig;
 
 /**
  * sleep.
@@ -14,7 +14,7 @@ import top.misec.config.Config;
 public class SleepTime {
 
     public void sleepDefault() {
-        Integer defaultTime = Config.getInstance().getTaskIntervalTime();
+        Integer defaultTime = TaskConfig.getInstance().getTaskIntervalTime();
         if (defaultTime == 0) {
             //兼容云函数旧版本配置
             defaultTime = 10;

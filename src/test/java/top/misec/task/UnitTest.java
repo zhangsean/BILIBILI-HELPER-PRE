@@ -1,7 +1,7 @@
 package top.misec.task;
 
 import lombok.extern.log4j.Log4j2;
-import top.misec.config.Config;
+import top.misec.config.TaskConfig;
 import top.misec.login.ServerVerify;
 import top.misec.login.Verify;
 import top.misec.utils.VersionInfo;
@@ -31,7 +31,7 @@ public class UnitTest {
         //每日任务65经验
 
         //初始化配置
-        Config.getInstance().configInit();
+        TaskConfig.getInstance().configInit();
 
 
         ServerPush.doServerPush();
