@@ -3,6 +3,8 @@ package top.misec.login;
 import lombok.Getter;
 
 /**
+ * server push .
+ *
  * @author Junzhou Liu
  * @since 2020/10/21 19:57
  */

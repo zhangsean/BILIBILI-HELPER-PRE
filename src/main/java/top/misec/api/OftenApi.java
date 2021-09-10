@@ -16,7 +16,7 @@ import top.misec.utils.HttpUtil;
 public class OftenApi {
 
     /**
-     * @return 返回主站查询到的硬币余额，查询失败返回0.0.
+     * 返回主站查询到的硬币余额，查询失败返回0.0.
      */
     public static Double getCoinBalance() {
         JsonObject responseJson = HttpUtil.doGet(ApiList.GET_COIN_BALANCE);
@@ -35,7 +35,7 @@ public class OftenApi {
     }
 
     /**
-     * @param type 1大会员B币券  2 大会员福利.
+     * type 1大会员B币券  2 大会员福利.
      */
     public static void getVipPrivilege(int type) {
         String requestBody = "type=" + type
@@ -76,6 +76,8 @@ public class OftenApi {
     }
 
     /**
+     * query username.
+     *
      * @param uid 用户uid
      * @return userName 查询到的用户名，为1则未查询到用户
      */

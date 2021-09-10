@@ -43,6 +43,8 @@ public class DailyTask {
     }
 
     /**
+     * get daily task status.
+     *
      * @return jsonObject 返回status对象
      * @value {"login":true,"watch":true,"coins":50,"share":true,"email":true,"tel":true,"safe_question":true,"identify_card":false}
      * @author @srcrs

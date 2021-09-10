@@ -17,7 +17,7 @@ import top.misec.utils.HttpUtil;
 import top.misec.utils.SleepTime;
 
 /**
- * 投币任务
+ * 投币任务.
  *
  * @author @JunzhouLiu @Kurenai
  * @since 2020-11-22 5:28

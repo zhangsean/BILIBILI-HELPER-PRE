@@ -4,21 +4,21 @@ import org.apache.logging.slf4j.Log4jLoggerFactory;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.spi.LoggerFactoryBinder;
 
+import lombok.Setter;
+
 /**
+ * StaticLoggerBinder.
+ *
  * @author itning
  * @since 2021/5/2 17:55
  */
 public class StaticLoggerBinder implements LoggerFactoryBinder {
 
-    private static final StaticLoggerBinder SINGLETON = new StaticLoggerBinder();
     private static final String JUL_LOGGER_FACTORY_CLASS_STR = org.slf4j.impl.JDK14LoggerFactory.class.getName();
     private static final String LOG4J2_LOGGER_FACTORY_CLASS_STR = Log4jLoggerFactory.class.getName();
-    private static final String REQUESTED_API_VERSION = "1.7";
-    public static LogImpl LOG_IMPL = LogImpl.LOG4J2;
+    @Setter
+    private static LogImpl LOG_IMPL = LogImpl.LOG4J2;
 
-    public static StaticLoggerBinder getSingleton() {
-        return SINGLETON;
-    }
 
     @Override
     public ILoggerFactory getLoggerFactory() {

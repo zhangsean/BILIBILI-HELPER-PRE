@@ -10,6 +10,8 @@ import top.misec.login.Verify;
 import top.misec.utils.VersionInfo;
 
 /**
+ * util test.
+ *
  * @author Junzhou Liu
  * @create 2021/1/15 23:16
  */
@@ -37,8 +39,7 @@ public class UnitTest {
         ConfigLoader.configInit();
 
         KeyValueClass kv = new Gson().fromJson(ConfigLoader.getDefaultConfig(), KeyValueClass.class);
-
-
+        log.info(kv);
         ServerPush.doServerPush();
 
 

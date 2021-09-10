@@ -3,7 +3,7 @@ package top.misec.push;
 import top.misec.push.model.PushMetaInfo;
 
 /**
- * 推送工具
+ * 推送工具.
  *
  * @author itning
  * @since 2021/3/22 17:51

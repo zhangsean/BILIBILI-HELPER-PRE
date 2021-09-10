@@ -5,6 +5,8 @@ import top.misec.push.impl.PushPlusPush;
 import top.misec.push.model.PushMetaInfo;
 
 /**
+ * push test .
+ *
  * @author itning
  * @since 2021/3/28 16:06
  */

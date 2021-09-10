@@ -1,6 +1,8 @@
 package top.misec.api;
 
 /**
+ * bili api .
+ *
  * @author Junzhou Liu
  * @since 2020/10/11 3:40
  */

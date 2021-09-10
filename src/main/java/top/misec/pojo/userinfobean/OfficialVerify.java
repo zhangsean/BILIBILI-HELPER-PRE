@@ -3,7 +3,7 @@ package top.misec.pojo.userinfobean;
 import lombok.Data;
 
 /**
- * Auto-generated: 2020-10-11 3:42:3
+ * Auto-generated: 2020-10-11 3:42:3.
  *
  * @author bejson.com (i@bejson.com)
  */

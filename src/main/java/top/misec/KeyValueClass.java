@@ -1,6 +1,7 @@
 package top.misec;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import top.misec.config.TaskConfig;
 
 /**
@@ -9,6 +10,7 @@ import top.misec.config.TaskConfig;
  * @author itning
  * @since 2021/4/29 17:55
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class KeyValueClass extends TaskConfig {
     private String dedeuserid;
@@ -17,10 +19,6 @@ public class KeyValueClass extends TaskConfig {
     private String serverpushkey;
     private String telegrambottoken;
     private String telegramchatid;
-
-    KeyValueClass() {
-        super();
-    }
 
     @Override
     public String toString() {
@@ -46,6 +44,4 @@ public class KeyValueClass extends TaskConfig {
                 + ", userAgent='" + userAgent + '\''
                 + '}';
     }
-
-
 }

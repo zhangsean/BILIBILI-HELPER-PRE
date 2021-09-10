@@ -36,8 +36,11 @@ public class GetVipPrivilege implements Task {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
         int day = cal.get(Calendar.DATE);
 
-        //根据userInfo.getVipStatus() ,如果是1 ，会员有效，0会员失效。
-        //@JunzhouLiu: fixed query_vipStatusType()现在可以查询会员状态，以及会员类型了 2020-10-15
+
+        /*
+           根据userInfo.getVipStatus() ,如果是1 ，会员有效，0会员失效。
+           @JunzhouLiu: fixed query_vipStatusType()现在可以查询会员状态，以及会员类型了 2020-10-15
+         */
         int vipType = queryVipStatusType();
 
         if (vipType == 0) {

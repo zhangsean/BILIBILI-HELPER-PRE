@@ -9,7 +9,7 @@ import top.misec.push.model.RetryContext;
 import top.misec.utils.HttpUtil;
 
 /**
- * 推送抽象类；公共模板方法封装
+ * 推送抽象类；公共模板方法封装.
  *
  * @author itning
  * @since 2021/3/22 16:36

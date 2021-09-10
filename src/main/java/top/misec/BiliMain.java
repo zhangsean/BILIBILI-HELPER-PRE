@@ -30,7 +30,7 @@ public class BiliMain {
     static {
         // 如果此标记为true，则为腾讯云函数，使用JUL作为日志输出。
         boolean scfFlag = Boolean.getBoolean("scfFlag");
-        StaticLoggerBinder.LOG_IMPL = scfFlag ? StaticLoggerBinder.LogImpl.JUL : StaticLoggerBinder.LogImpl.LOG4J2;
+        StaticLoggerBinder.setLOG_IMPL(scfFlag ? StaticLoggerBinder.LogImpl.JUL : StaticLoggerBinder.LogImpl.LOG4J2);
         log = LoggerFactory.getLogger(BiliMain.class);
         InputStream inputStream = BiliMain.class.getResourceAsStream("/logging.properties");
         try {
@@ -73,7 +73,7 @@ public class BiliMain {
      * 用于腾讯云函数触发.
      */
     public static void mainHandler(KeyValueClass ignored) {
-        StaticLoggerBinder.LOG_IMPL = StaticLoggerBinder.LogImpl.JUL;
+        StaticLoggerBinder.setLOG_IMPL(StaticLoggerBinder.LogImpl.JUL);
         String config = System.getProperty("config");
         if (null == config) {
             System.out.println("取config配置为空！！！");

@@ -8,7 +8,7 @@ import top.misec.push.AbstractPush;
 import top.misec.push.model.PushMetaInfo;
 
 /**
- * TG推送
+ * TG推送 .
  *
  * @author itning
  * @since 2021/3/22 17:55

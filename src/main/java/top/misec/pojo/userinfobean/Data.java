@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Auto-generated
+ * Auto-generated .
  *
  * @author Junzhou Liu
  * @since 2020/10/11 4:21
