@@ -2,7 +2,6 @@ package top.misec.config;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import lombok.Data;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import top.misec.utils.GsonUtils;
@@ -16,9 +15,9 @@ import top.misec.utils.LoadFileResource;
  * @since 2020/10/13 17:11
  */
 @Log4j2
-@Data
 public class ConfigLoader {
 
+    @Getter
     private static TaskConfig taskConfig;
 
     @Getter
@@ -27,13 +26,6 @@ public class ConfigLoader {
     static {
         defaultConfig = LoadFileResource.loadJsonFromAsset("config.json");
         taskConfig = build(defaultConfig);
-    }
-
-    public static TaskConfig getTaskConfig() {
-        if (taskConfig == null) {
-            taskConfig = build(defaultConfig);
-        }
-        return taskConfig;
     }
 
     /**
@@ -53,8 +45,8 @@ public class ConfigLoader {
     public static void configInit() {
         String customConfig = LoadFileResource.loadConfigJsonFromFile();
         if (customConfig != null) {
-            log.info("读取外部自定义配置文件成功,若部分配置项不存在则会采用默认配置\n{}", customConfig);
             mergeConfig(GsonUtils.fromJson(customConfig, TaskConfig.class));
+            log.info("读取外部自定义配置文件成功,若部分配置项不存在则会采用默认配置,合并后的配置为\n{}", taskConfig.toString());
         } else {
             log.info("未扫描到外部配置文件,使用默认配置文件\n{}", defaultConfig);
         }
