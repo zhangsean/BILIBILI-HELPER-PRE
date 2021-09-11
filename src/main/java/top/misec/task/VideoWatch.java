@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
-import top.misec.login.Verify;
+import top.misec.config.ConfigLoader;
 import top.misec.utils.HttpUtil;
 
 /**
@@ -25,7 +25,6 @@ public class VideoWatch implements Task {
 
     @Override
     public void run() {
-
         JsonObject dailyTaskStatus = getDailyTaskStatus();
         String bvid = getVideoId.getRegionRankingVideoBvid();
         if (!dailyTaskStatus.get("watch").getAsBoolean()) {
@@ -64,7 +63,7 @@ public class VideoWatch implements Task {
      * @param bvid 要分享的视频bvid.
      */
     public void dailyAvShare(String bvid) {
-        String requestBody = "bvid=" + bvid + "&csrf=" + Verify.getInstance().getBiliJct();
+        String requestBody = "bvid=" + bvid + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
         JsonObject result = HttpUtil.doPost((ApiList.AV_SHARE), requestBody);
 
         String videoTitle = OftenApi.getVideoTitle(bvid);

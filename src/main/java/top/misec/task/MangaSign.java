@@ -19,7 +19,7 @@ public class MangaSign implements Task {
     @Override
     public void run() {
 
-        String platform = ConfigLoader.getTaskConfig().getDevicePlatform();
+        String platform = ConfigLoader.helperConfig.getTaskConfig().getDevicePlatform();
         String requestBody = "platform=" + platform;
         JsonObject result = HttpUtil.doPost(ApiList.MANGA, requestBody);
 

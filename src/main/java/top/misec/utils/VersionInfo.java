@@ -22,6 +22,7 @@ public class VersionInfo {
 
     public static void initInfo() {
         String release = LoadFileResource.loadJsonFromAsset("release.json");
+        // JsonObject jsonObject = new Gson().fromJson(release, JsonObject.class);
         JsonObject jsonObject = new JsonParser().parse(release).getAsJsonObject();
         releaseVersion = jsonObject.get("tag_main").getAsString();
         releaseDate = jsonObject.get("release_date").getAsString();

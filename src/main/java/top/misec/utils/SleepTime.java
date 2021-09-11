@@ -14,7 +14,7 @@ import top.misec.config.ConfigLoader;
 public class SleepTime {
 
     public void sleepDefault() {
-        Integer defaultTime = ConfigLoader.getTaskConfig().getTaskIntervalTime();
+        Integer defaultTime = ConfigLoader.helperConfig.getTaskConfig().getTaskIntervalTime();
         if (defaultTime == 0) {
             //兼容云函数旧版本配置
             defaultTime = 10;

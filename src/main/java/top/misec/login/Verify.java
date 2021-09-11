@@ -31,23 +31,23 @@ public class Verify {
         Verify.biliJct = biliJct;
     }
 
-    public static Verify getInstance() {
-        return VERIFY;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getSessData() {
-        return sessData;
-    }
-
-    public String getBiliJct() {
-        return biliJct;
-    }
-
-    public String getVerify() {
-        return "bili_jct=" + getBiliJct() + ";SESSDATA=" + getSessData() + ";DedeUserID=" + getUserId() + ";";
-    }
+//    public static Verify getInstance() {
+//        return VERIFY;
+//    }
+//
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    public String getSessData() {
+//        return sessData;
+//    }
+//
+//    public String getBiliJct() {
+//        return biliJct;
+//    }
+//
+//    public String getVerify() {
+//        return "bili_jct=" + getBiliJct() + ";SESSDATA=" + getSessData() + ";DedeUserID=" + getUserId() + ";";
+//    }
 }

@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
-import top.misec.login.Verify;
+import top.misec.config.ConfigLoader;
 import top.misec.utils.HttpUtil;
 
 /**
@@ -77,7 +77,7 @@ public class GetVideoId {
 
     public ArrayList<String> queryDynamicNew() {
         ArrayList<String> arrayList = new ArrayList<>();
-        String urlParameter = "?uid=" + Verify.getInstance().getUserId()
+        String urlParameter = "?uid=" + ConfigLoader.helperConfig.getDedeUserId()
                 + "&type_list=8"
                 + "&from="
                 + "&platform=web";

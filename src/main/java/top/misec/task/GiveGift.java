@@ -4,9 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import lombok.extern.log4j.Log4j2;
-import top.misec.config.TaskConfig;
 import top.misec.config.ConfigLoader;
-import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 
 /**
@@ -19,16 +17,11 @@ import top.misec.utils.HttpUtil;
 @Log4j2
 public class GiveGift implements Task {
 
-    /**
-     * 获取日志记录器对象.
-     */
-    TaskConfig taskConfig = ConfigLoader.getTaskConfig();
-
     @Override
     public void run() {
         try {
             /* 从配置类中读取是否需要执行赠送礼物 */
-            if (!Boolean.TRUE.equals(taskConfig.getGiveGift())) {
+            if (!Boolean.TRUE.equals(ConfigLoader.helperConfig.getTaskConfig().getGiveGift())) {
                 log.info("未开启自动送出即将过期礼物功能");
                 return;
             }
@@ -156,8 +149,8 @@ public class GiveGift implements Task {
      * @since 2020-10-13
      */
     public JsonObject xliveBagSend(String requestBody) {
-        requestBody += "&uid=" + Verify.getInstance().getUserId()
-                + "&csrf=" + Verify.getInstance().getBiliJct()
+        requestBody += "&uid=" + ConfigLoader.helperConfig.getDedeUserId()
+                + "&csrf=" + ConfigLoader.helperConfig.getBiliJct()
                 + "&send_ruid=" + "0"
                 + "&storm_beat_id=" + "0"
                 + "&price=" + "0"
@@ -178,9 +171,9 @@ public class GiveGift implements Task {
         String roomId;
         /* 直播间 uid 即 up 的 id*/
         String uid;
-        if (!"0".equals(taskConfig.getUpLive())) {
+        if (!"0".equals(ConfigLoader.helperConfig.getTaskConfig().getUpLive())) {
             /* 获取指定up的id */
-            uid = taskConfig.getUpLive();
+            uid = ConfigLoader.helperConfig.getTaskConfig().getUpLive();
             roomId = getRoomInfoOld(uid);
             String status = "0";
             if (status.equals(roomId)) {

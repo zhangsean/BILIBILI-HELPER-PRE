@@ -27,13 +27,13 @@ public class MatchGame implements Task {
 
     @Override
     public void run() {
-        if (!ConfigLoader.getTaskConfig().getMatchGame()) {
+        if (!ConfigLoader.helperConfig.getTaskConfig().getMatchGame()) {
             log.info("赛事预测未开启");
             return;
         }
 
-        if (OftenApi.getCoinBalance() < ConfigLoader.getTaskConfig().getMinimumNumberOfCoins()) {
-            log.info("{}个硬币都没有，参加什么预测呢？任务结束", ConfigLoader.getTaskConfig().getMinimumNumberOfCoins());
+        if (OftenApi.getCoinBalance() < ConfigLoader.helperConfig.getTaskConfig().getMinimumNumberOfCoins()) {
+            log.info("{}个硬币都没有，参加什么预测呢？任务结束", ConfigLoader.helperConfig.getTaskConfig().getMinimumNumberOfCoins());
             return;
         }
         JsonObject resultJson = queryContestQuestion(getTime(), 1, 50);
@@ -46,7 +46,7 @@ public class MatchGame implements Task {
                 return;
             }
             if (list != null) {
-                int coinNumber = ConfigLoader.getTaskConfig().getPredictNumberOfCoins();
+                int coinNumber = ConfigLoader.helperConfig.getTaskConfig().getPredictNumberOfCoins();
                 int contestId;
                 String contestName;
                 int questionId;
@@ -76,7 +76,7 @@ public class MatchGame implements Task {
                     JsonObject teamB = questionJson.get("details").getAsJsonArray().get(1).getAsJsonObject();
                     log.info("当前赔率为:  {}:{}", teamA.get("odds").getAsDouble(), teamB.get("odds").getAsDouble());
 
-                    if (ConfigLoader.getTaskConfig().getShowHandModel()) {
+                    if (ConfigLoader.helperConfig.getTaskConfig().getShowHandModel()) {
                         if (teamA.get("odds").getAsDouble() <= teamB.get("odds").getAsDouble()) {
                             teamId = teamB.get("detail_id").getAsInt();
                             teamName = teamB.get("option").getAsString();
@@ -125,7 +125,7 @@ public class MatchGame implements Task {
                 + "&detail_id=" + detail_id
                 + "&count=" + count
                 + "&is_fav=0"
-                + "&csrf=" + Verify.getInstance().getBiliJct();
+                + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
 
         JsonObject result = HttpUtil.doPost(ApiList.DO_ADD, requestbody);
 

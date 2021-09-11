@@ -7,7 +7,6 @@ import java.util.logging.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import top.misec.config.ConfigLoader;
@@ -44,23 +43,28 @@ public class BiliMain {
     public static void main(String[] args) {
 
         if (args.length < 3) {
-            log.error("任务启动失败");
-            log.error("Cookies参数缺失，请检查是否在Github Secrets中配置Cookies参数");
-            return;
+            log.info("正在使用新版配置文件置启动");
         }
-        //读取环境变量
-        Verify.verifyInit(args[0], args[1], args[2]);
+        if (args.length >= 3) {
+            log.info("正在使用执行参数启动，此方式即将弃用，请在config.json中配置ck和推送渠道");
+            Verify.verifyInit(args[0], args[1], args[2]);
+        }
 
-        if (args.length > 4) {
-            ServerVerify.verifyInit(args[3], args[4]);
-        } else if (args.length > 3) {
+        if (args.length == 4) {
+
             ServerVerify.verifyInit(args[3]);
+        }
+
+        if (args.length == 5) {
+            ServerVerify.verifyInit(args[3], args[4]);
         }
 
         VersionInfo.printVersionInfo();
         //每日任务65经验
         ConfigLoader.configInit();
-        if (!Boolean.TRUE.equals(ConfigLoader.getTaskConfig().getSkipDailyTask())) {
+
+
+        if (!Boolean.TRUE.equals(ConfigLoader.helperConfig.getTaskConfig().getSkipDailyTask())) {
             DailyTask dailyTask = new DailyTask();
             dailyTask.doDailyTask();
         } else {
@@ -80,27 +84,19 @@ public class BiliMain {
             log.error("取config配置为空！！！");
             return;
         }
-        KeyValueClass kv;
+
         try {
-            kv = new Gson().fromJson(config, KeyValueClass.class);
+            ConfigLoader.configInit(config);
         } catch (JsonSyntaxException e) {
             log.error("配置json格式有误，请检查是否是合法的json串", e);
             return;
         }
 
-        //  读取环境变量。
-        Verify.verifyInit(kv.getDedeuserid(), kv.getSessdata(), kv.getBiliJct());
-
-        if (null != kv.getTelegrambottoken() && null != kv.getTelegramchatid()) {
-            ServerVerify.verifyInit(kv.getTelegrambottoken(), kv.getTelegramchatid());
-        } else if (null != kv.getServerpushkey()) {
-            ServerVerify.verifyInit(kv.getServerpushkey());
-        }
 
         VersionInfo.printVersionInfo();
         //每日任务65经验
-        ConfigLoader.configInit(new Gson().toJson(kv));
-        if (!Boolean.TRUE.equals(ConfigLoader.getTaskConfig().getSkipDailyTask())) {
+
+        if (!Boolean.TRUE.equals(ConfigLoader.helperConfig.getTaskConfig().getSkipDailyTask())) {
             DailyTask dailyTask = new DailyTask();
             dailyTask.doDailyTask();
         } else {

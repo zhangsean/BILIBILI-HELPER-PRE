@@ -12,7 +12,6 @@ import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
 import top.misec.config.ConfigLoader;
-import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 import top.misec.utils.SleepTime;
 
@@ -53,14 +52,14 @@ public class CoinAdd implements Task {
         //安全检查，最多投币数
         final int maxNumberOfCoins = 5;
         //获取自定义配置投币数 配置写在src/main/resources/taskConfig.json中
-        int setCoin = ConfigLoader.getTaskConfig().getNumberOfCoins();
+        int setCoin = ConfigLoader.helperConfig.getTaskConfig().getNumberOfCoins();
         // 预留硬币数
-        int reserveCoins = ConfigLoader.getTaskConfig().getReserveCoins();
+        int reserveCoins = ConfigLoader.helperConfig.getTaskConfig().getReserveCoins();
 
         //已投的硬币
         int useCoin = TaskInfoHolder.expConfirm();
         //投币策略
-        int coinAddPriority = ConfigLoader.getTaskConfig().getCoinAddPriority();
+        int coinAddPriority = ConfigLoader.helperConfig.getTaskConfig().getCoinAddPriority();
 
         if (setCoin > maxNumberOfCoins) {
             log.info("自定义投币数为: {}枚,为保护你的资产，自定义投币数重置为: " + maxNumberOfCoins + "枚", setCoin);
@@ -112,7 +111,7 @@ public class CoinAdd implements Task {
             addCoinOperateCount++;
             new VideoWatch().watchVideo(bvid);
             new SleepTime().sleepDefault();
-            boolean flag = coinAdd(bvid, 1, ConfigLoader.getTaskConfig().getSelectLike());
+            boolean flag = coinAdd(bvid, 1, ConfigLoader.helperConfig.getTaskConfig().getSelectLike());
             if (flag) {
                 needCoins--;
             }
@@ -143,7 +142,7 @@ public class CoinAdd implements Task {
                     + "&multiply=" + multiply
                     + "&select_like=" + selectLike
                     + "&cross_domain=" + "true"
-                    + "&csrf=" + Verify.getInstance().getBiliJct();
+                    + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
             JsonObject jsonObject = HttpUtil.doPost(ApiList.COIN_ADD, requestBody, headers);
             if (jsonObject.get(STATUS_CODE_STR).getAsInt() == 0) {
                 log.info("为 " + videoTitle + " 投币成功");

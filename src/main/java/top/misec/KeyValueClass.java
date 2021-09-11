@@ -2,6 +2,7 @@ package top.misec;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import top.misec.config.HelperConfig;
 import top.misec.config.TaskConfig;
 
 /**
@@ -12,36 +13,18 @@ import top.misec.config.TaskConfig;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class KeyValueClass extends TaskConfig {
-    private String dedeuserid;
-    private String sessdata;
-    private String biliJct;
-    private String serverpushkey;
-    private String telegrambottoken;
-    private String telegramchatid;
-
-    @Override
-    public String toString() {
-        StringBuilder dedeuserid = new StringBuilder(this.dedeuserid);
-        StringBuilder sessData = new StringBuilder(this.sessdata);
-        StringBuilder biliJct = new StringBuilder(this.biliJct);
-        return "KeyValueClass{" + "dedeuserid='" + dedeuserid.replace(2, 4, "****") + '\''
-                + ", sessdata='" + sessData.replace(3, 15, "****") + '\''
-                + ", biliJct='" + biliJct.replace(3, 15, "****") + '\''
-                + ", serverpushkey='" + serverpushkey + '\''
-                + ", telegrambottoken='" + telegrambottoken + '\''
-                + ", telegramchatid='" + telegramchatid + '\''
-                + ", numberOfCoins=" + numberOfCoins + '\''
-                + ", reserveCoins=" + reserveCoins + '\''
-                + ", selectLike=" + selectLike + '\''
-                + ", monthEndAutoCharge=" + monthEndAutoCharge + '\''
-                + ", giveGift=" + giveGift + '\''
-                + ", upLive='" + upLive + '\''
-                + ", chargeForLove='" + chargeForLove + '\''
-                + ", devicePlatform='" + devicePlatform + '\''
-                + ", coinAddPriority=" + coinAddPriority + '\''
-                + ", skipDailyTask=" + skipDailyTask + '\''
-                + ", userAgent='" + userAgent + '\''
-                + '}';
-    }
+public class KeyValueClass extends HelperConfig {
+//    private String dedeuserid;
+//    private String sessdata;
+//    private String biliJct;
+//    private String serverpushkey;
+//    private String telegrambottoken;
+//    private String telegramchatid;
+//
+//    //        StringBuilder dedeuserid = new StringBuilder(this.dedeuserid);
+//    //        StringBuilder sessData = new StringBuilder(this.sessdata);
+//    //        StringBuilder biliJct = new StringBuilder(this.biliJct);
+//
+//
+//    }
 }

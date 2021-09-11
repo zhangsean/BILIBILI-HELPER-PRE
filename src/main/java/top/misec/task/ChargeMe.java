@@ -13,7 +13,6 @@ import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
 import top.misec.config.ConfigLoader;
-import top.misec.login.Verify;
 import top.misec.utils.HelpUtil;
 import top.misec.utils.HttpUtil;
 
@@ -33,7 +32,7 @@ public class ChargeMe implements Task {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
         int day = cal.get(Calendar.DATE);
         //被充电用户的userID
-        String userId = ConfigLoader.getTaskConfig().getChargeForLove();
+        String userId = ConfigLoader.helperConfig.getTaskConfig().getChargeForLove();
 
         String userName = OftenApi.queryUserNameByUid(userId);
 
@@ -47,7 +46,7 @@ public class ChargeMe implements Task {
             return;
         }
 
-        if (!Boolean.TRUE.equals(ConfigLoader.getTaskConfig().getMonthEndAutoCharge())) {
+        if (!Boolean.TRUE.equals(ConfigLoader.helperConfig.getTaskConfig().getMonthEndAutoCharge())) {
             log.info("未开启月底给自己充电功能");
             return;
         }
@@ -57,7 +56,7 @@ public class ChargeMe implements Task {
             return;
         }
 
-        if (day < ConfigLoader.getTaskConfig().getChargeDay()) {
+        if (day < ConfigLoader.helperConfig.getTaskConfig().getChargeDay()) {
             log.info("今天是本月的第: {}天，还没到充电日子呢", day);
             return;
         }
@@ -75,13 +74,13 @@ public class ChargeMe implements Task {
         /*
           判断条件 是月底&&是年大会员&&b币券余额大于2&&配置项允许自动充电.
          */
-        if (day == ConfigLoader.getTaskConfig().getChargeDay() && couponBalance >= 2) {
+        if (day == ConfigLoader.helperConfig.getTaskConfig().getChargeDay() && couponBalance >= 2) {
             String requestBody = "bp_num=" + couponBalance
                     + "&is_bp_remains_prior=true"
                     + "&up_mid=" + userId
                     + "&otype=up"
                     + "&oid=" + userId
-                    + "&csrf=" + Verify.getInstance().getBiliJct();
+                    + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
 
             JsonObject jsonObject = HttpUtil.doPost(ApiList.AUTO_CHARGE, requestBody);
 
@@ -109,7 +108,7 @@ public class ChargeMe implements Task {
 
         String requestBody = "order_id=" + token
                 + "&message=" + "期待up主的新作品！"
-                + "&csrf=" + Verify.getInstance().getBiliJct();
+                + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
         JsonObject jsonObject = HttpUtil.doPost(ApiList.CHARGE_COMMENT, requestBody);
 
         if (jsonObject.get(STATUS_CODE_STR).getAsInt() == 0) {

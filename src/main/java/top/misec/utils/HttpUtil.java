@@ -22,7 +22,7 @@ import com.google.gson.JsonParser;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
-import top.misec.login.Verify;
+import top.misec.config.ConfigLoader;
 
 /**
  * http utils.
@@ -44,7 +44,7 @@ public class HttpUtil {
             .setConnectionRequestTimeout(5000)
             .setSocketTimeout(10000)
             .build();
-    private static Verify verify = Verify.getInstance();
+    //  private static Verify verify = Verify.getInstance();
     private static String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) "
             + "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.54";
     private static CloseableHttpClient httpClient = null;
@@ -78,7 +78,7 @@ public class HttpUtil {
         }
         httpPost.setHeader("Connection", "keep-alive");
         httpPost.setHeader("User-Agent", userAgent);
-        httpPost.setHeader("Cookie", verify.getVerify());
+        httpPost.setHeader("cookie", ConfigLoader.helperConfig.getBiliCookies());
 
         if (null != headers && !headers.isEmpty()) {
             for (String key : headers.keySet()) {
@@ -128,7 +128,7 @@ public class HttpUtil {
             // 设置请求头信息，鉴权
             httpGet.setHeader("Connection", "keep-alive");
             httpGet.setHeader("User-Agent", userAgent);
-            httpGet.setHeader("Cookie", verify.getVerify());
+            httpGet.setHeader("cookie", ConfigLoader.helperConfig.getBiliCookies());
             for (NameValuePair pair : getPairList(pJson)) {
                 httpGet.setHeader(pair.getName(), pair.getValue());
             }

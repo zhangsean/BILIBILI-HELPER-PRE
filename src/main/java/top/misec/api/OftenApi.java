@@ -3,7 +3,7 @@ package top.misec.api;
 import com.google.gson.JsonObject;
 
 import lombok.extern.log4j.Log4j2;
-import top.misec.login.Verify;
+import top.misec.config.ConfigLoader;
 import top.misec.utils.HttpUtil;
 
 /**
@@ -39,7 +39,7 @@ public class OftenApi {
      */
     public static void getVipPrivilege(int type) {
         String requestBody = "type=" + type
-                + "&csrf=" + Verify.getInstance().getBiliJct();
+                + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
         JsonObject jsonObject = HttpUtil.doPost(ApiList.VIP_PRIVILEGE_RECEIVE, requestBody);
         int responseCode = jsonObject.get("code").getAsInt();
         if (responseCode == 0) {

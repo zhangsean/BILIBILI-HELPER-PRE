@@ -2,7 +2,7 @@ package top.misec.config;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import lombok.Getter;
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import top.misec.utils.GsonUtils;
 import top.misec.utils.HttpUtil;
@@ -15,17 +15,14 @@ import top.misec.utils.LoadFileResource;
  * @since 2020/10/13 17:11
  */
 @Log4j2
+@Data
 public class ConfigLoader {
-
-    @Getter
-    private static TaskConfig taskConfig;
-
-    @Getter
-    private static String defaultConfig;
+    public static HelperConfig helperConfig;
+    private static String defaultHelperConfig;
 
     static {
-        defaultConfig = LoadFileResource.loadJsonFromAsset("config.json");
-        taskConfig = build(defaultConfig);
+        defaultHelperConfig = LoadFileResource.loadJsonFromAsset("config.json");
+        helperConfig = buildHelperConfig(defaultHelperConfig);
     }
 
     /**
@@ -34,9 +31,9 @@ public class ConfigLoader {
      * @param json config json
      */
     public static void configInit(String json) {
-        taskConfig = build(json);
-        HttpUtil.setUserAgent(taskConfig.getUserAgent());
-        log.info(taskConfig.toString());
+        helperConfig = buildHelperConfig(json);
+        HttpUtil.setUserAgent(helperConfig.getTaskConfig().getUserAgent());
+        log.info(helperConfig.getPushConfig().toString());
     }
 
     /**
@@ -45,22 +42,33 @@ public class ConfigLoader {
     public static void configInit() {
         String customConfig = LoadFileResource.loadConfigJsonFromFile();
         if (customConfig != null) {
-            mergeConfig(GsonUtils.fromJson(customConfig, TaskConfig.class));
-            log.info("读取外部自定义配置文件成功,若部分配置项不存在则会采用默认配置,合并后的配置为\n{}", taskConfig.toString());
+            mergeConfig(GsonUtils.fromJson(customConfig, HelperConfig.class));
+            log.info("读取外部自定义配置文件成功,若部分配置项不存在则会采用默认配置,合并后的配置为\n{}", helperConfig.toString());
         } else {
-            log.info("未扫描到外部配置文件,使用默认配置文件\n{}", defaultConfig);
+            log.info("未扫描到外部配置文件,使用默认配置文件\n{}", defaultHelperConfig);
         }
         validationConfig();
-        HttpUtil.setUserAgent(taskConfig.getUserAgent());
+        helperConfig.initCookiesMap();
+        HttpUtil.setUserAgent(helperConfig.getTaskConfig().getUserAgent());
     }
 
     /**
      * 使用自定义文件时校验相关值.
      */
     private static void validationConfig() {
+
+        if (helperConfig.getBiliCookies().length() < 1) {
+            log.info("未在config.json中配置ck");
+            return;
+        }
+
+        TaskConfig taskConfig = helperConfig.getTaskConfig();
+
         taskConfig.setChargeDay(taskConfig.getChargeDay() > 28 || taskConfig.getChargeDay() < 1 ? 28 : taskConfig.getChargeDay())
                 .setTaskIntervalTime(taskConfig.getTaskIntervalTime() <= 0 ? 1 : taskConfig.getTaskIntervalTime())
                 .setPredictNumberOfCoins(taskConfig.getPredictNumberOfCoins() > 10 ? 10 : taskConfig.getPredictNumberOfCoins() <= 0 ? 1 : taskConfig.getPredictNumberOfCoins());
+
+        helperConfig.setTaskConfig(taskConfig);
     }
 
     /**
@@ -68,11 +76,11 @@ public class ConfigLoader {
      *
      * @param sourceConfig sourceConfig
      */
-    private static void mergeConfig(TaskConfig sourceConfig) {
-        BeanUtil.copyProperties(sourceConfig, taskConfig, new CopyOptions().setIgnoreNullValue(true));
+    private static void mergeConfig(HelperConfig sourceConfig) {
+        BeanUtil.copyProperties(sourceConfig, helperConfig, new CopyOptions().setIgnoreNullValue(true));
     }
 
-    private static TaskConfig build(String configJson) {
-        return GsonUtils.fromJson(configJson, TaskConfig.class);
+    private static HelperConfig buildHelperConfig(String configJson) {
+        return GsonUtils.fromJson(configJson, HelperConfig.class);
     }
 }
