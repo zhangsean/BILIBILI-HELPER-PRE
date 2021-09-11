@@ -1,5 +1,7 @@
 package top.misec.task;
 
+import java.io.File;
+
 import lombok.extern.log4j.Log4j2;
 import top.misec.config.ConfigLoader;
 import top.misec.utils.VersionInfo;
@@ -15,17 +17,15 @@ public class UnitTest {
 
     public static void main(String[] args) {
 
-        log.info(" ");
-
         VersionInfo.printVersionInfo();
 
-        //初始化配置
         if (args.length > 0) {
-            log.info("使用自定义位置名称的配置文件当前加载的配置文件路径是:{}", args[0]);
+            log.info("使用自定义目录的配置文件");
             ConfigLoader.configInit(args[0]);
         } else {
             log.info("使用同目录下的config.json文件");
-            ConfigLoader.configInit("config.json");
+            String currentPath = System.getProperty("user.dir") + File.separator + "config.json";
+            ConfigLoader.configInit(currentPath);
         }
         new UserCheck().run();
         new GiveGift().run();

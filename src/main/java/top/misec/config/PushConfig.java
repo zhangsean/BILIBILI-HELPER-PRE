@@ -13,7 +13,9 @@ import top.misec.push.impl.WeComPush;
 import top.misec.push.model.PushMetaInfo;
 
 /**
- * @author JunzhouLiu
+ * pushconfig ddd
+ *
+ * @author JunzhouLiu itning
  */
 @SuppressWarnings("all")
 @Data

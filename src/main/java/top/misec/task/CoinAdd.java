@@ -46,7 +46,6 @@ public class CoinAdd implements Task {
 
     @Override
     public void run() {
-
         //投币最多操作数 解决csrf校验失败时死循环的问题
         int addCoinOperateCount = 0;
         //安全检查，最多投币数

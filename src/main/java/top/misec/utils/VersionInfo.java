@@ -21,12 +21,12 @@ public class VersionInfo {
     private static String releaseInfo = "";
 
     public static void initInfo() {
-        String release = LoadFileResource.loadJsonFromAsset("release.json");
+        String release = ReadFileUtils.loadJsonFromAsset("release.json");
         // JsonObject jsonObject = new Gson().fromJson(release, JsonObject.class);
         JsonObject jsonObject = new JsonParser().parse(release).getAsJsonObject();
         releaseVersion = jsonObject.get("tag_main").getAsString();
         releaseDate = jsonObject.get("release_date").getAsString();
-        releaseInfo = LoadFileResource.loadJsonFromAsset("release.info");
+        releaseInfo = ReadFileUtils.loadJsonFromAsset("release.info");
     }
 
     public static void printVersionInfo() {
