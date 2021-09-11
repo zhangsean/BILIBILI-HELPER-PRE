@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 public class PushConfig {
 
-    private static String SCT_KEY;
-    private static String TG_BOT_TOKEN;
-    private static String TG_USER_ID;
+    private String SCT_KEY;
+    private String TG_BOT_TOKEN;
+    private String TG_USER_ID;
 
 }

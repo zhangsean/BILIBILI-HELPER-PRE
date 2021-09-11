@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonSyntaxException;
 
 import top.misec.config.ConfigLoader;
-import top.misec.login.ServerVerify;
-import top.misec.login.Verify;
 import top.misec.org.slf4j.impl.StaticLoggerBinder;
 import top.misec.task.DailyTask;
 import top.misec.task.ServerPush;
@@ -42,27 +40,16 @@ public class BiliMain {
 
     public static void main(String[] args) {
 
-        if (args.length < 3) {
-            log.info("正在使用新版配置文件置启动");
-        }
-        if (args.length >= 3) {
-            log.info("正在使用执行参数启动，此方式即将弃用，请在config.json中配置ck和推送渠道");
-            Verify.verifyInit(args[0], args[1], args[2]);
-        }
-
-        if (args.length == 4) {
-
-            ServerVerify.verifyInit(args[3]);
-        }
-
-        if (args.length == 5) {
-            ServerVerify.verifyInit(args[3], args[4]);
-        }
-
         VersionInfo.printVersionInfo();
         //每日任务65经验
-        ConfigLoader.configInit();
 
+        if (args.length > 0) {
+            log.info("使用自定义位置名称的配置文件");
+            ConfigLoader.configInit(args[0]);
+        } else {
+            log.info("使用同目录下的config.json文件");
+            ConfigLoader.configInit("config.json");
+        }
 
         if (!Boolean.TRUE.equals(ConfigLoader.helperConfig.getTaskConfig().getSkipDailyTask())) {
             DailyTask dailyTask = new DailyTask();

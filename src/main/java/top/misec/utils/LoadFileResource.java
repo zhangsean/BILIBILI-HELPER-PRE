@@ -23,10 +23,33 @@ public class LoadFileResource {
      *
      * @return config
      */
-    public static String loadConfigJsonFromFile() {
+    public static String loadConfigFile() {
         String config = null;
         try {
             String outPath = System.getProperty("user.dir") + File.separator + "config.json";
+            InputStream is = new FileInputStream(outPath);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            config = new String(buffer, StandardCharsets.UTF_8);
+        } catch (FileNotFoundException e) {
+            log.debug("未扫描到外部配置文件");
+        } catch (IOException e) {
+            log.debug(e);
+        }
+        return config;
+    }
+
+    /**
+     * 从外部资源读取配置文件.
+     *
+     * @return config
+     */
+    public static String loadConfigFile(String fileName) {
+        String config = null;
+        try {
+            String outPath = System.getProperty("user.dir") + File.separator + fileName;
             InputStream is = new FileInputStream(outPath);
             int size = is.available();
             byte[] buffer = new byte[size];

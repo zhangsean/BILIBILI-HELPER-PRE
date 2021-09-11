@@ -30,7 +30,7 @@ public class ConfigLoader {
      *
      * @param json config json
      */
-    public static void configInit(String json) {
+    public static void configInit(String json, boolean isSCF) {
         helperConfig = buildHelperConfig(json);
         HttpUtil.setUserAgent(helperConfig.getTaskConfig().getUserAgent());
         log.info(helperConfig.getPushConfig().toString());
@@ -39,13 +39,11 @@ public class ConfigLoader {
     /**
      * 优先从jar包同级目录读取.
      */
-    public static void configInit() {
-        String customConfig = LoadFileResource.loadConfigJsonFromFile();
+    public static void configInit(String filename) {
+        String customConfig = LoadFileResource.loadConfigFile(filename);
         if (customConfig != null) {
             mergeConfig(GsonUtils.fromJson(customConfig, HelperConfig.class));
             log.info("读取外部自定义配置文件成功,若部分配置项不存在则会采用默认配置,合并后的配置为\n{}", helperConfig.toString());
-        } else {
-            log.info("未扫描到外部配置文件,使用默认配置文件\n{}", defaultHelperConfig);
         }
         validationConfig();
         helperConfig.initCookiesMap();
