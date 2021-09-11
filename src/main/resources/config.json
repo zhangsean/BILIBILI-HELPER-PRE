@@ -22,6 +22,9 @@
   "pushConfig": {
     "SCT_KEY": "",
     "TG_BOT_TOKEN": "",
-    "TG_USER_ID": ""
+    "TG_USER_ID": "",
+    "DING_TALK_URL": "",
+    "PUSH_PLUS_TOKEN": "",
+    "WE_COM_TOKEN": ""
   }
 }

@@ -13,7 +13,6 @@ import lombok.extern.log4j.Log4j2;
 import top.misec.api.ApiList;
 import top.misec.api.OftenApi;
 import top.misec.config.ConfigLoader;
-import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 import top.misec.utils.SleepTime;
 
