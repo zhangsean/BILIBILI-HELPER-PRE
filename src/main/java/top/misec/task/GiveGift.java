@@ -8,7 +8,7 @@ import top.misec.config.ConfigLoader;
 import top.misec.utils.HttpUtils;
 
 /**
- * B站直播送出即将过期的礼物
+ * B站直播送出即将过期的礼物.
  *
  * @author srcrs
  * @since 2020-10-13
