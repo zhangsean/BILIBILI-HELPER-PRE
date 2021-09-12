@@ -29,7 +29,7 @@ public class CoinAdd implements Task {
      * 检查是否投币.
      *
      * @param bvid av号
-     * @return 返回是否投过硬币了.
+     * @return 返回是否投过硬币了. true没有投币，false透投过了。
      */
     static boolean isCoinAdded(String bvid) {
         String urlParam = "?bvid=" + bvid;
@@ -38,9 +38,9 @@ public class CoinAdd implements Task {
         int multiply = result.getAsJsonObject("data").get("multiply").getAsInt();
         if (multiply > 0) {
             log.info("之前已经为av{}投过{}枚硬币啦", bvid, multiply);
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -133,7 +133,7 @@ public class CoinAdd implements Task {
     private boolean coinAdd(String bvid, int multiply, int selectLike) {
         String videoTitle = OftenApi.getVideoTitle(bvid);
         //判断曾经是否对此av投币过
-        if (!isCoinAdded(bvid)) {
+        if (isCoinAdded(bvid)) {
             Map<String, String> headers = new HashMap<>(10);
             headers.put("Referer", "https://www.bilibili.com/video/" + bvid);
             headers.put("Origin", "https://www.bilibili.com");
@@ -141,7 +141,7 @@ public class CoinAdd implements Task {
                     + "&multiply=" + multiply
                     + "&select_like=" + selectLike
                     + "&cross_domain=" + "true"
-                    + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
+                    + "&csrf=" + ConfigLoader.helperConfig.getBiliVerify().getBiliJct();
             JsonObject jsonObject = HttpUtil.doPost(ApiList.COIN_ADD, requestBody, headers);
             if (jsonObject.get(STATUS_CODE_STR).getAsInt() == 0) {
                 log.info("为 " + videoTitle + " 投币成功");

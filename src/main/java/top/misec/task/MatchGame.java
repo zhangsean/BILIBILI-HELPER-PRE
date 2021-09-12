@@ -124,7 +124,7 @@ public class MatchGame implements Task {
                 + "&detail_id=" + detail_id
                 + "&count=" + count
                 + "&is_fav=0"
-                + "&csrf=" + ConfigLoader.helperConfig.getBiliJct();
+                + "&csrf=" + ConfigLoader.helperConfig.getBiliVerify().getBiliJct();
 
         JsonObject result = HttpUtil.doPost(ApiList.DO_ADD, requestbody);
 

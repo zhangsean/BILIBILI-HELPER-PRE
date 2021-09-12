@@ -28,8 +28,8 @@ public class UnitTest {
             ConfigLoader.configInit(currentPath);
         }
         new UserCheck().run();
-        new GiveGift().run();
-        ServerPush.doServerPush();
+
+      //  new MatchGame().run();
 
 
     }

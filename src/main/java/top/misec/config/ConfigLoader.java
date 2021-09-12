@@ -48,7 +48,7 @@ public class ConfigLoader {
             log.info("未在 ：{} 目录读取到配置文件", filePath);
         }
         validationConfig();
-        helperConfig.initCookiesMap();
+        helperConfig.getBiliVerify().initCookiesMap();
         HttpUtil.setUserAgent(helperConfig.getTaskConfig().getUserAgent());
     }
 
@@ -57,7 +57,7 @@ public class ConfigLoader {
      */
     private static void validationConfig() {
 
-        if (helperConfig.getBiliCookies().length() < 1) {
+        if (helperConfig.getBiliVerify().getBiliCookies().length() < 1) {
             log.info("未在config.json中配置ck");
             return;
         }
