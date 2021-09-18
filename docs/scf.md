@@ -52,22 +52,16 @@
 |  key   | value  |
 |  ----  | ----  |
 | `scfFlag`  |`true` |
-| `config`  | `参照样例` |
+| `config`  | `复制下方完整的config样例，填好对应的值，直接粘贴即可。` |
 
-**如果不知道自己的UA之类数据，以及看不懂每个值的含义，可以采用配置生成网页生成自己的配置**
+**如果不知道自己的UA之类数据，以及看不懂每个值的含义，可以[点击进入配置自动生成页面暂不支持v2.0.0](https://utils.misec.top/index)**
 
-**[点击进入配置自动生成页面暂不支持v2.0.0](https://utils.misec.top/index)**
-
-**config value样例**
-
-**完整的cookies获取方法见项目README**
-
-如果使用推送，请将推送的key在指定位置。
+**config样例**
 
 ```json
 {
   "biliVerify": {
-    "biliCookies": "你的bilibili cookies"
+    "biliCookies": "你的bilibili cookies，完整的cookies获取方法见项目README"
   },
   "taskConfig": {
     "skipDailyTask": false,
@@ -89,7 +83,7 @@
     "userAgent": "你的默认UA"
   },
   "pushConfig": {
-    "SC_KEY": "",
+    "SC_KEY": "如果使用推送，请将推送的key填写在指定位置。",
     "SCT_KEY": "",
     "TG_BOT_TOKEN": "",
     "TG_USER_ID": "",
