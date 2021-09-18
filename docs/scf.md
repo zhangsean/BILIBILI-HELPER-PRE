@@ -1,5 +1,7 @@
 ## 腾讯云函数使用教程
 
+## v2.0.0版本未经过测试，如果有问题，请在issues反馈
+
 ###
 关于腾讯云，云函数功能开通相关问题，请加群询问。
 
@@ -54,90 +56,49 @@
 
 **如果不知道自己的UA之类数据，以及看不懂每个值的含义，可以采用配置生成网页生成自己的配置**
 
-**[点击进入配置自动生成页面](https://utils.misec.top/index)**
+**[点击进入配置自动生成页面暂不支持v2.0.0](https://utils.misec.top/index)**
 
 **config value样例**
 
-**dedeuserid sessdata biliJct 必填 获取方式见项目README**
+**完整的cookies获取方法见项目README**
 
-
-样例1:使用TGbot推送,如果不使用tgbot请将`telegrambottoken`和`telegramchatid`的值改为`null`。
-
-```json
-{
-  "matchGame": false,
-  "showHandModel": false,
-  "predictNumberOfCoins": 1,
-  "minimumNumberOfCoins": 1000,
-  "taskIntervalTime": 10,
-  "numberOfCoins": 5,
-  "reserveCoins": 50,
-  "selectLike": 0,
-  "monthEndAutoCharge": true,
-  "giveGift": true,
-  "upLive": "0",
-  "chargeForLove": "14602398",
-  "devicePlatform": "ios",
-  "coinAddPriority": 1,
-  "skipDailyTask": false,
-  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15",
-  "dedeuserid": "",
-  "sessdata": "",
-  "biliJct": "",
-  "telegrambottoken": "0000000:aaaaaaaa",
-  "telegramchatid": "123456",
-}
-```
-样例2:使用SERVER酱的配置：
+如果使用推送，请将推送的key在指定位置。
 
 ```json
 {
-  "matchGame": false,
-  "showHandModel": false,
-  "predictNumberOfCoins": 1,
-  "minimumNumberOfCoins": 1000,
-  "taskIntervalTime": 10,
-  "numberOfCoins": 5,
-  "reserveCoins": 50,
-  "selectLike": 0,
-  "monthEndAutoCharge": true,
-  "giveGift": true,
-  "upLive": "0",
-  "chargeForLove": "14602398",
-  "devicePlatform": "ios",
-  "coinAddPriority": 1,
-  "skipDailyTask": false,
-  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15",
-  "dedeuserid": "",
-  "sessdata": "",
-  "biliJct": "",
-  "serverpushkey": "申请的server酱的KEY"
-}
-```
-
-样例3:使用钉钉推送。
-```json
-{
-  "matchGame": false,
-  "showHandModel": false,
-  "predictNumberOfCoins": 1,
-  "minimumNumberOfCoins": 1000,
-  "taskIntervalTime": 10,
-  "numberOfCoins": 5,
-  "reserveCoins": 50,
-  "selectLike": 0,
-  "monthEndAutoCharge": true,
-  "giveGift": true,
-  "upLive": "0",
-  "chargeForLove": "14602398",
-  "devicePlatform": "ios",
-  "coinAddPriority": 1,
-  "skipDailyTask": false,
-  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15",
-  "dedeuserid": "",
-  "sessdata": "",
-  "biliJct": "",
-  "serverpushkey": "https://oapi.dingtalk.com/robot/send?access_token=XXX"
+  "biliVerify": {
+    "biliCookies": "你的bilibili cookies"
+  },
+  "taskConfig": {
+    "skipDailyTask": false,
+    "matchGame": false,
+    "showHandModel": false,
+    "predictNumberOfCoins": 1,
+    "minimumNumberOfCoins": 100,
+    "taskIntervalTime": 20,
+    "numberOfCoins": 5,
+    "reserveCoins": 10,
+    "selectLike": 0,
+    "monthEndAutoCharge": true,
+    "giveGift": true,
+    "upLive": "0",
+    "chargeForLove": "14602398",
+    "chargeDay": 8,
+    "devicePlatform": "ios",
+    "coinAddPriority": 1,
+    "userAgent": "你的默认UA"
+  },
+  "pushConfig": {
+    "SC_KEY": "",
+    "SCT_KEY": "",
+    "TG_BOT_TOKEN": "",
+    "TG_USER_ID": "",
+    "DING_TALK_URL": "",
+    "DING_TALK_SECRET": "",
+    "PUSH_PLUS_TOKEN": "",
+    "WE_COM_GROUP_TOKEN": "",
+    "WE_COM_APP_TOKEN_CONF": ""
+  }
 }
 ```
 
