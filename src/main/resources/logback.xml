@@ -15,7 +15,7 @@
             <maxFileSize>${MAX_SIZE}</maxFileSize>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{HH:mm:ss} %-5level %logger{56} - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
