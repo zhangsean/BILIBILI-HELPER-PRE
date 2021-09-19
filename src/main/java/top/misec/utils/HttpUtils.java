@@ -1,9 +1,10 @@
 package top.misec.utils;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -16,14 +17,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import lombok.Data;
-import lombok.extern.log4j.Log4j2;
 import top.misec.config.ConfigLoader;
+
+import java.io.IOException;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * http utils.
@@ -32,7 +30,7 @@ import top.misec.config.ConfigLoader;
  * @since 2020/10/11 4:03
  */
 
-@Log4j2
+@Slf4j
 @Data
 public class HttpUtils {
     private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom()
@@ -121,7 +119,7 @@ public class HttpUtils {
             httpResponse = httpClient.execute(httpGet);
             resultJson = processResult(httpResponse);
         } catch (Exception e) {
-            log.error(e);
+            log.error("", e);
         } finally {
             closeResource(httpClient, httpResponse);
         }
