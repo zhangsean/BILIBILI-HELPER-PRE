@@ -16,7 +16,7 @@
     "monthEndAutoCharge": true,
     "giveGift": true,
     "silver2Coin": true,
-    "JURY": true,
+    "JURY": false,
     "JURY_VOTE": 3,
     "JURY_ANONYMOUS": 0,
     "upLive": "0",

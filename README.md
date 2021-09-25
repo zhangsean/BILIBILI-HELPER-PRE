@@ -130,7 +130,7 @@ ps ：需要本地有 java8 执行环境。
     "monthEndAutoCharge": true,
     "giveGift": true,
     "silver2Coin": true,
-    "JURY": true,
+    "JURY": false,
     "JURY_VOTE": 0,
     "JURY_ANONYMOUS": 0,
     "upLive": "0",
@@ -193,7 +193,7 @@ ps ：需要本地有 java8 执行环境。
 | coinAddPriority      | [0,1]                | `0`：优先给热榜视频投币，`1`：优先给关注的 up 投币。                               |
 | userAgent            | 浏览器 UA            | 你的浏览器的 UA。                                                                  |
 | skipDailyTask        | [false,true]         | 是否跳过每日任务，默认`true`,如果关闭跳过每日任务，请改为`false`。                 |
-| JURY        | [false,true]         | 是否跳过风纪委投票，默认`true`,如果关闭跳过风纪委投票，请改为`false`。                 |
+| JURY        | [false,true]         | 风纪委投票，默认关闭`false`,如需开启请改为请改为`false`。                 |
 | JURY_VOTE        | [0,1,2,3,4]         | 投票观点，默认：`0`，`0`：随机观点；`1`：合适； `2`：一般； `3`：不合适；`4`：无法判断。                 |
 | skipDailyTask        | [0,1]         |  //是否匿名，默认：`0`，` 0`：匿名； `1`：不匿名.                |
 
