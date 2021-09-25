@@ -17,10 +17,13 @@ public class TaskConfig {
     public Boolean matchGame;
     public Boolean showHandModel;
     public Boolean silver2Coin;
+    public Boolean JURY;
     public Integer predictNumberOfCoins;
     public Integer minimumNumberOfCoins;
     public Integer numberOfCoins;
     public Integer selectLike;
+    public Integer JURY_VOTE;
+    public Integer JURY_ANONYMOUS;
     public String upLive;
     public String devicePlatform;
     public Integer coinAddPriority;

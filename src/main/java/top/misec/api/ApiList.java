@@ -27,6 +27,11 @@ public class ApiList {
     public static final String WECOM_APP_PUSH_GET_TOKEN = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
     public static final String WECOM_APP_PUSH = "https://qyapi.weixin.qq.com/cgi-bin/message/send";
     /**
+     * 风纪委
+     */
+    public static final String GET_JURY_CASE_NEXT = "https://api.bilibili.com/x/credit/v2/jury/case/next";
+    public static final String JURY_VOTE = "https://api.bilibili.com/x/credit/v2/jury/vote";
+    /**
      * 查询获取已获取的投币经验.
      */
     public static final String NEED_COIN = "https://www.bilibili.com/plus/account/exp.php";

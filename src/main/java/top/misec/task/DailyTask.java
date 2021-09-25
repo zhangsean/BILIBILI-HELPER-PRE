@@ -26,6 +26,7 @@ public class DailyTask {
 
     public DailyTask() {
         dailyTasks = new ArrayList<>();
+        dailyTasks.add(new Juryvote());
         dailyTasks.add(new VideoWatch());
         dailyTasks.add(new MangaSign());
         dailyTasks.add(new CoinAdd());
