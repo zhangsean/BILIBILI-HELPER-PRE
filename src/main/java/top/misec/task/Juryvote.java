@@ -34,12 +34,14 @@ public class Juryvote implements Task {
             if (code == 0) {
                 JsonObject data = jsonObject.getAsJsonObject("data");
                 log.info("处理案件编号: {}", data.get("case_id").getAsInt());
-                Random random = new Random();
-                int sleepTime = (int) ((random.nextDouble() + 0.5) * 1000);
                 Randompause(16);
-
+                int vote = ConfigLoader.helperConfig.getTaskConfig().getJURY_VOTE();
+                if (vote == 0){
+                    Random random = new Random();
+                    vote = random.nextInt(3) + 1;
+                }
                 String requestBody = "case_id=" + data.get("case_id").getAsInt()
-                        + "&vote=" + ConfigLoader.helperConfig.getTaskConfig().getJURY_VOTE()  // 投票观点，1：合适 2：一般 3：不合适 4：无法判断
+                        + "&vote=" +  vote // 投票观点，1：合适 2：一般 3：不合适 4：无法判断
                         + "&anonymous=" + ConfigLoader.helperConfig.getTaskConfig().getJURY_ANONYMOUS()  //0：匿名 1：不匿名
                         + "&csrf=" + ConfigLoader.helperConfig.getBiliVerify().getBiliJct();
 
