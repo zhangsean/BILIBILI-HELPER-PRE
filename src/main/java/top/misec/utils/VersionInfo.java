@@ -37,6 +37,7 @@ public class VersionInfo {
             log.info("-----最新版本更新内容-----\n{}", jsonObject.get("body").getAsString().replaceAll("\"", ""));
             log.info("最近更新时间: {}", jsonObject.get("created_at"));
             log.info("项目开源地址: {}", projectRepo);
+            log.info("-----版本信息-----\n");
         } catch (Exception e) {
             log.warn("网络问题，未请求到新版本", e);
         }

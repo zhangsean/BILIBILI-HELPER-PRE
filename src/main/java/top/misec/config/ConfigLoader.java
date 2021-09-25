@@ -4,9 +4,12 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import top.misec.task.ServerPush;
 import top.misec.utils.GsonUtils;
 import top.misec.utils.HttpUtils;
 import top.misec.utils.ReadFileUtils;
+
+import java.io.File;
 
 /**
  * Auto-generated: 2020-10-13 17:10:40.
@@ -41,16 +44,19 @@ public class ConfigLoader {
      * 优先从jar包同级目录读取.
      */
     public static void configInit(String filePath) {
-        String customConfig = ReadFileUtils.readFile(filePath);
-        if (customConfig != null) {
+        File Config = new File(filePath);
+        if(Config.exists()){
+            String customConfig = ReadFileUtils.readFile(filePath);
             mergeConfig(GsonUtils.fromJson(customConfig, HelperConfig.class));
             log.info("读取自定义配置文件成功,若部分配置项不存在则会采用默认配置.");
+            validationConfig();
+            helperConfig.getBiliVerify().initCookiesMap();
+            HttpUtils.setUserAgent(helperConfig.getTaskConfig().getUserAgent());
         } else {
-            log.info("未在 ：{} 目录读取到配置文件", filePath);
+            log.error("配置文件：{} 不存在", filePath);
+            System.exit(0);
         }
-        validationConfig();
-        helperConfig.getBiliVerify().initCookiesMap();
-        HttpUtils.setUserAgent(helperConfig.getTaskConfig().getUserAgent());
+
     }
 
     /**
@@ -59,8 +65,9 @@ public class ConfigLoader {
     private static void validationConfig() {
 
         if (helperConfig.getBiliVerify().getBiliCookies().length() < 1) {
-            log.info("未在配置文件中配置cookies");
-            return;
+            log.error("未配置cookies,请先配置cookies再启动。");
+            ServerPush.doServerPush();
+            System.exit(0);
         }
 
         TaskConfig taskConfig = helperConfig.getTaskConfig();

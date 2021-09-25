@@ -51,7 +51,7 @@ public class WeComAppPush extends AbstractPush {
 
     @Override
     protected String generatePushBody(PushMetaInfo metaInfo, String content) {
-        content = content.replaceAll("\r\n\r", "").replaceAll("\n\n\n","\n").replaceAll("\n\n","\n");
+        content = content.replaceAll("\r", "").replaceAll("\n\n","\n");
         WeComMessageSendRequest request = new WeComMessageSendRequest();
         request.setToUser(metaInfo.getToUser());
         request.setAgentId(metaInfo.getAgentId());
