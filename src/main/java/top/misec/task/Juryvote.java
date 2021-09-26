@@ -28,12 +28,13 @@ public class Juryvote implements Task {
             return;
         }
         int code;
+        int i = 1;
         do {
             JsonObject jsonObject = HttpUtils.doGet(ApiList.GET_JURY_CASE_NEXT);
             code = jsonObject.get("code").getAsInt();
             if (code == 0) {
                 JsonObject data = jsonObject.getAsJsonObject("data");
-                log.info("处理案件编号: {}", data.get("case_id").getAsInt());
+                log.info("处理案件编号: {}", data.get("case_id").getAsString());
                 Randompause(16);
                 int vote = ConfigLoader.helperConfig.getTaskConfig().getJURY_VOTE();
                 if (vote == 0){
@@ -44,7 +45,7 @@ public class Juryvote implements Task {
                 if (null == content){
                     content="";
                 }
-                String requestBody = "case_id=" + data.get("case_id").getAsInt()
+                String requestBody = "case_id=" + data.get("case_id").getAsString()
                         + "&vote=" +  vote // 投票观点，1：合适 2：一般 3：不合适 4：无法判断
                         + "&content=" + content //投票理由
                         + "&anonymous=" + ConfigLoader.helperConfig.getTaskConfig().getJURY_ANONYMOUS()  //0：匿名 1：不匿名
@@ -52,10 +53,11 @@ public class Juryvote implements Task {
 
                 JsonObject votejsonObject = HttpUtils.doPost(ApiList.JURY_VOTE,requestBody);
                 if (votejsonObject.get("code").getAsInt() == 0){
-                    log.info("案件编号:{}处理成功",data.get("case_id").getAsInt());
+                    log.info("案件编号:{}处理成功,本次运行已处理{}件案件.",data.get("case_id").getAsString(),i);
+                    i = ++i;
                     Randompause(0); //随机暂停
                 } else {
-                    log.error("案件编号:{}处理失败。错误报告：{}",data.get("case_id").getAsInt(),votejsonObject.get("message").getAsString());
+                    log.error("案件编号:{}处理失败。错误报告：{}",data.get("case_id").getAsString(),votejsonObject.get("message").getAsString());
                 }
 
                 code = votejsonObject.get("code").getAsInt();
