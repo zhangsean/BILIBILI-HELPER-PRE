@@ -29,6 +29,7 @@ public class TaskConfig {
     public Integer coinAddPriority;
     public String userAgent;
     public String chargeForLove;
+    public String JURY_CONTENT;
     public Integer chargeDay;
     public Integer reserveCoins;
     public Integer taskIntervalTime;

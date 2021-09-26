@@ -70,7 +70,11 @@ public class HttpUtils {
             String[] itemArray = requestBody.split("&");
             for (String item : itemArray) {
                 String[] keyValueArray = item.split("=");
-                builder.add(keyValueArray[0], keyValueArray[1]);
+                if (keyValueArray.length < 2){
+                    builder.add(keyValueArray[0],"");
+                } else {
+                    builder.add(keyValueArray[0], keyValueArray[1]);
+                }
             }
             body = builder.build();
         }

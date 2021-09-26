@@ -40,8 +40,13 @@ public class Juryvote implements Task {
                     Random random = new Random();
                     vote = random.nextInt(3) + 1;
                 }
+                String content = ConfigLoader.helperConfig.getTaskConfig().getJURY_CONTENT();
+                if (null == content){
+                    content="";
+                }
                 String requestBody = "case_id=" + data.get("case_id").getAsInt()
                         + "&vote=" +  vote // 投票观点，1：合适 2：一般 3：不合适 4：无法判断
+                        + "&content=" + content //投票理由
                         + "&anonymous=" + ConfigLoader.helperConfig.getTaskConfig().getJURY_ANONYMOUS()  //0：匿名 1：不匿名
                         + "&csrf=" + ConfigLoader.helperConfig.getBiliVerify().getBiliJct();
 
@@ -50,7 +55,7 @@ public class Juryvote implements Task {
                     log.info("案件编号:{}处理成功",data.get("case_id").getAsInt());
                     Randompause(0); //随机暂停
                 } else {
-                    log.error("案件编号:{}处理失败，{}",data.get("case_id").getAsInt(),votejsonObject.get("message").getAsString());
+                    log.error("案件编号:{}处理失败。错误报告：{}",data.get("case_id").getAsInt(),votejsonObject.get("message").getAsString());
                 }
 
                 code = votejsonObject.get("code").getAsInt();
