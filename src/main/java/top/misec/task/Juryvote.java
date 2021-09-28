@@ -1,21 +1,14 @@
 package top.misec.task;
 
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import top.misec.api.ApiList;
 import top.misec.config.ConfigLoader;
 import top.misec.utils.HttpUtils;
-import top.misec.utils.SleepTime;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 /**
- * 硬币日志.
+ * 风纪委投票.
  *
  * @author junzhou
  */
@@ -34,7 +27,8 @@ public class Juryvote implements Task {
             code = jsonObject.get("code").getAsInt();
             if (code == 0) {
                 JsonObject data = jsonObject.getAsJsonObject("data");
-                log.info("处理案件编号: {}", data.get("case_id").getAsString());
+                String caseid = data.get("case_id").getAsString();
+                log.info("处理案件编号: {}", caseid);
                 Randompause(16);
                 int vote = ConfigLoader.helperConfig.getTaskConfig().getJURY_VOTE();
                 if (vote == 0){
@@ -45,7 +39,7 @@ public class Juryvote implements Task {
                 if (null == content){
                     content="";
                 }
-                String requestBody = "case_id=" + data.get("case_id").getAsString()
+                String requestBody = "case_id=" + caseid
                         + "&vote=" +  vote // 投票观点，1：合适 2：一般 3：不合适 4：无法判断
                         + "&content=" + content //投票理由
                         + "&anonymous=" + ConfigLoader.helperConfig.getTaskConfig().getJURY_ANONYMOUS()  //0：匿名 1：不匿名
@@ -53,11 +47,11 @@ public class Juryvote implements Task {
 
                 JsonObject votejsonObject = HttpUtils.doPost(ApiList.JURY_VOTE,requestBody);
                 if (votejsonObject.get("code").getAsInt() == 0){
-                    log.info("案件编号:{}处理成功,本次运行已处理{}件案件.",data.get("case_id").getAsString(),i);
+                    log.info("案件编号:{}处理成功,本次运行已处理{}件案件.",caseid,i);
                     i = ++i;
                     Randompause(0); //随机暂停
                 } else {
-                    log.error("案件编号:{}处理失败。错误报告：{}",data.get("case_id").getAsString(),votejsonObject.get("message").getAsString());
+                    log.error("案件编号:{}处理失败。错误报告：{}",caseid,votejsonObject.get("message").getAsString());
                 }
 
                 code = votejsonObject.get("code").getAsInt();

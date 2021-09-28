@@ -101,7 +101,7 @@ ps ：需要本地有 java8 执行环境。
 
 ### 三、使用 腾讯云函数
 
-请参考[腾讯云函数部署](https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE/blob/main/docs/scf.md)
+请参考[腾讯云函数部署](https://github.com/graytoowolf/BILIBILI-HELPER-PRE/blob/main/docs/scf.md)
 
 ### 四、使用 GitLab CI/CD
 
