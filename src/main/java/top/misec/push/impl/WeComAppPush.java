@@ -64,7 +64,7 @@ public class WeComAppPush extends AbstractPush {
         } else {
             request.setMsgType("mpnews");
             WeComMessageSendRequest.Articles Articles = new WeComMessageSendRequest.Articles();
-            Articles.setAuthor("海尔破小助手");
+            Articles.setAuthor("小破站助手");
             Articles.setTitle("BILIBILI-HELPER任务简报");
             Articles.setDigest(content);
             Articles.setContent(content.replaceAll("\n","<br>"));
