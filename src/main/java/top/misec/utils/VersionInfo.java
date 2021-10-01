@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VersionInfo {
     private static String releaseVersion = "";
     private static String releaseDate = "";
-    private static String projectRepo = "https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE";
+    private static String projectRepo = "https://github.com/graytoowolf/BILIBILI-HELPER-PRE";
     private static String releaseInfo = "";
 
     public static void initInfo() {
