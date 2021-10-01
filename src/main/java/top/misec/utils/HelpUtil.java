@@ -64,7 +64,7 @@ public class HelpUtil {
                 + String.join("", Collections.nCopies(s1, "*"))
                 + userName.substring(s1 + s2);
     }
-
+    
     public static String utcTime(String utcTime){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         //设置时区UTC
