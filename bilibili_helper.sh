@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #new Env('BILIBILI-HELPER');
 
+echo "Version: v1.0"
 if ! [ -x "$(command -v java)" ]; then
 	echo "开始安装Java运行环境........."
 	apk update
