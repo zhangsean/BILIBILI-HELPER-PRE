@@ -79,6 +79,7 @@
     "silver2Coin": true,
     "JURY": false,
     "JURY_VOTE": 0,
+    "JURY_CONTENT": "",
     "JURY_ANONYMOUS": 0,
     "upLive": "0",
     "chargeForLove": "14602398",
