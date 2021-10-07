@@ -20,9 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2.3.1
         with:
-          java-version: 1.8
+          distribution: 'zulu'
+          java-version: '8'
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -32,13 +33,11 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Build with Maven
         env:
-          BILI_JCT: ${{ secrets.BILI_JCT }}
-          DEDEUSERID: ${{ secrets.DEDEUSERID }}
-          SESSDATA: ${{ secrets.SESSDATA }}
-          SERVERPUSHKEY: ${{ secrets.SERVERPUSHKEY }}
-          TELEGRAMBOTTOKEN: ${{ secrets.TELEGRAMBOTTOKEN }}
-          TELEGRAMCHATID: ${{ secrets.TELEGRAMCHATID }}
+          CONFIG: ${{ secrets.CONFIG }}
           TZ: Asia/Shanghai
           # 时区配置为Asia/Shanghai
         run:
-          mvn compile exec:java -Dexec.mainClass="top.misec.BiliMain" -Dexec.args="${DEDEUSERID} ${SESSDATA} ${BILI_JCT} ${SERVERPUSHKEY} ${TELEGRAMBOTTOKEN} ${TELEGRAMCHATID}"
+          echo ${CONFIG} > config.json;
+          mvn -B package --file pom.xml;
+          mv -f target/BILIBILI-HELPER-*.jar .;
+          java -jar BILIBILI-HELPER-*.jar;
