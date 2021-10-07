@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #new Env('BILIBILI-HELPER');
 
+echo "Version: v1.0"
 if ! [ -x "$(command -v java)" ]; then
 	echo "开始安装Java运行环境........."
 	apk update
@@ -16,7 +17,7 @@ else
 	VERSION="0"
 fi
 echo "当前版本:"$VERSION
-latest=$(curl -s https://api.github.com/repos/JunzhouLiu/BILIBILI-HELPER-PRE/releases/latest)
+latest=$(curl -s https://api.github.com/repos/graytoowolf/BILIBILI-HELPER-PRE/releases/latest)
 
 latest_VERSION=$(echo $latest | jq '.tag_name' | sed 's/v\|"//g')
 echo "最新版本:"$latest_VERSION

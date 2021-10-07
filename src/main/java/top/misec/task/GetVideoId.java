@@ -28,6 +28,7 @@ public class GetVideoId {
         this.followUpVideoList = queryDynamicNew();
         this.rankVideoList = regionRanking();
         videoUpdate("14602398");
+        videoUpdate("407099834");
         if (this.followUpVideoList.size() > 0) {
             this.followUpVideoQueue = new ArrayBlockingQueue<>(followUpVideoList.size());
             this.followUpVideoQueue.addAll(followUpVideoList);

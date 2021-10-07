@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VersionInfo {
     private static String releaseVersion = "";
     private static String releaseDate = "";
-    private static String projectRepo = "https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE";
+    private static String projectRepo = "https://github.com/graytoowolf/BILIBILI-HELPER-PRE";
     private static String releaseInfo = "";
 
     public static void initInfo() {
@@ -29,7 +29,7 @@ public class VersionInfo {
 
     public static void printVersionInfo() {
         initInfo();
-        JsonObject jsonObject = HttpUtils.doGet("https://api.github.com/repos/JunzhouLiu/BILIBILI-HELPER-PRE/releases/latest");
+        JsonObject jsonObject = HttpUtils.doGet("https://api.github.com/repos/graytoowolf/BILIBILI-HELPER-PRE/releases/latest");
         log.info("-----版本信息-----");
         log.info("当前版本: {}", releaseVersion);
         try {
@@ -41,6 +41,5 @@ public class VersionInfo {
         } catch (Exception e) {
             log.warn("网络问题，未请求到新版本", e);
         }
-
     }
 }
