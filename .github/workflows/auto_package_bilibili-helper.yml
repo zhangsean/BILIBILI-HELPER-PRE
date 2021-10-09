@@ -58,7 +58,6 @@ jobs:
           zip BILIBILI-HELPER\ v${{steps.tag_latest.outputs.value}}.zip config.json
           zip BILIBILI-HELPER\ v${{steps.tag_latest.outputs.value}}.zip -r docs/
           zip BILIBILI-HELPER\ v${{steps.tag_latest.outputs.value}}.zip LICENSE
-          zip BILIBILI-HELPER\ v${{steps.tag_latest.outputs.value}}.zip README.md
 
       - name: Create Release
         id: create_release
