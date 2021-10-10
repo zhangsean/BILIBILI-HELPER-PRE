@@ -10,8 +10,6 @@ import java.util.Random;
 
 /**
  * 风纪委投票.
- *
- * @author junzhou
  */
 @Slf4j
 public class Juryvote implements Task {

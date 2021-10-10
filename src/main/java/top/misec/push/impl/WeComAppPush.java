@@ -51,9 +51,9 @@ public class WeComAppPush extends AbstractPush {
 
     @Override
     protected String generatePushBody(PushMetaInfo metaInfo, String content) {
-        content = content.replaceAll("\r", "").replaceAll("\n\n", "\n");
+        content = content.replaceAll("\r", "").replaceAll("\n\n", "\n").replaceAll("\n", "<br>");
 
-        String Digest = getSubString(content, "-----版本信息", "版本信息-----") + getSubString(content, "\n\n本日任务", "天\n");
+        String Digest = getSubString(content, "Cookies-用户名称-硬币余额-检查结束-全部执行完毕-总经验值-到升级到");
         WeComMessageSendRequest request = new WeComMessageSendRequest();
         request.setToUser(metaInfo.getToUser());
         request.setAgentId(metaInfo.getAgentId());
@@ -67,8 +67,8 @@ public class WeComAppPush extends AbstractPush {
             WeComMessageSendRequest.Articles Articles = new WeComMessageSendRequest.Articles();
             Articles.setAuthor("小破站助手");
             Articles.setTitle("BILIBILI-HELPER任务简报");
-            Articles.setDigest(Digest);
-            Articles.setContent(content.replaceAll("\n", "<br>"));
+            Articles.setDigest(Digest.replaceAll("登录检查结束","\n").replaceAll("-",""));
+            Articles.setContent(content);
             Articles.setThumb_media_id(metaInfo.getMediaid());
             WeComMessageSendRequest.Mpnews Mpnews = new WeComMessageSendRequest.Mpnews();
             Mpnews.setArticles(Collections.singletonList(Articles));
@@ -78,32 +78,22 @@ public class WeComAppPush extends AbstractPush {
     }
 
     /**
-     * 取两个文本之间的文本值
      *
-     * @param text  源文本 比如：欲取全文本为 12345
-     * @param left  文本前面
-     * @param right 后面文本
+     *
+     * @param text 源文本 比如：欲取全文本为 12345
+     * @param left 文本前面
      * @return 返回 String
      */
 
-    public static String getSubString(String text, String left, String right) {
+    public static String getSubString(String text, String left) {
         String result = "";
-        int zLen;
-        if (left == null || left.isEmpty()) {
-            zLen = 0;
-        } else {
-            zLen = text.indexOf(left);
-            if (zLen > -1) {
-                zLen += left.length();
-            } else {
-                return result;
+        for (String retval : text.split("<br>")) {
+            for (String Lookfor : left.split("-")) {
+                if (retval.indexOf(Lookfor) != -1) {
+                    result = result + retval + "\n";
+                }
             }
         }
-        int yLen = text.indexOf(right, zLen);
-        if (yLen < 0 || right == null || right.isEmpty()) {
-            yLen = text.length();
-        }
-        result = left + text.substring(zLen, yLen) + right;
         return result;
     }
 
