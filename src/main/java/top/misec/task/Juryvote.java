@@ -28,7 +28,7 @@ public class Juryvote implements Task {
                 JsonObject data = jsonObject.getAsJsonObject("data");
                 String caseid = data.get("case_id").getAsString();
                 log.info("处理案件编号: {}", caseid);
-                Randompause(16);
+                Randompause(11);
                 int vote = ConfigLoader.helperConfig.getTaskConfig().getJURY_VOTE();
                 if (vote == 0) {
                     Random random = new Random();
@@ -39,21 +39,21 @@ public class Juryvote implements Task {
                     content = "";
                 }
                 String requestBody = "case_id=" + caseid
-                        + "&vote=" + vote // 投票观点，1：合适 2：一般 3：不合适 4：无法判断
                         + "&content=" + content //投票理由
                         + "&anonymous=" + ConfigLoader.helperConfig.getTaskConfig().getJURY_ANONYMOUS()  //0：匿名 1：不匿名
                         + "&csrf=" + ConfigLoader.helperConfig.getBiliVerify().getBiliJct();
-
-                JsonObject votejsonObject = HttpUtils.doPost(ApiList.JURY_VOTE, requestBody);
-                if (votejsonObject.get("code").getAsInt() == 0) {
-                    log.info("案件编号:{}处理成功,本次运行已处理{}件案件.", caseid, i);
-                    i++;
-                    Randompause(0); //随机暂停
-                } else {
-                    log.error("案件编号:{}处理失败。错误报告：{}", caseid, votejsonObject.get("message").getAsString());
+                JsonObject dyvotejsonObject = HttpUtils.doPost(ApiList.JURY_VOTE, requestBody + "&vote=0");
+                if (dyvotejsonObject.get("code").getAsInt() == 0) {
+                    JsonObject votejsonObject = HttpUtils.doPost(ApiList.JURY_VOTE, requestBody + "&vote=" + (vote + 10)); // 投票观点，11：合适 12：一般 13：不合适 14：无法判断
+                    if (votejsonObject.get("code").getAsInt() == 0) {
+                        log.info("案件编号:{}处理成功,本次运行已处理{}件案件.", caseid, i);
+                        i++;
+                        Randompause(0); //随机暂停
+                    } else {
+                        log.error("案件编号:{}处理失败。错误报告：{}", caseid, votejsonObject.get("message").getAsString());
+                    }
+                    code = votejsonObject.get("code").getAsInt();
                 }
-
-                code = votejsonObject.get("code").getAsInt();
             } else {
                 log.info(jsonObject.get("message").getAsString());
             }
