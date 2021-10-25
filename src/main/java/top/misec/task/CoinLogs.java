@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import top.misec.api.ApiList;
 import top.misec.utils.HttpUtils;
 
+import java.text.DecimalFormat;
+
 /**
  * 硬币日志.
  *
@@ -27,6 +29,7 @@ public class CoinLogs implements Task {
 
             double income = 0.0;
             double expend = 0.0;
+            DecimalFormat df = new DecimalFormat("0.0");
             for (JsonElement jsonElement : coinList) {
                 double delta = jsonElement.getAsJsonObject().get("delta").getAsDouble();
                 //  String reason = jsonElement.getAsJsonObject().get("reason").getAsString();
@@ -36,8 +39,8 @@ public class CoinLogs implements Task {
                     expend += delta;
                 }
             }
-            log.info("最近一周收入{}个硬币", income);
-            log.info("最近一周支出{}个硬币", expend);
+            log.info("最近一周收入{}个硬币", df.format(income));
+            log.info("最近一周支出{}个硬币", df.format(expend));
         }
 
     }

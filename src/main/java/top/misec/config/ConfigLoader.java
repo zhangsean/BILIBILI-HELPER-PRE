@@ -45,7 +45,7 @@ public class ConfigLoader {
      */
     public static void configInit(String filePath) {
         File Config = new File(filePath);
-        if(Config.exists()){
+        if (Config.exists()) {
             String customConfig = ReadFileUtils.readFile(filePath);
             mergeConfig(GsonUtils.fromJson(customConfig, HelperConfig.class));
             log.info("读取自定义配置文件成功,若部分配置项不存在则会采用默认配置.");

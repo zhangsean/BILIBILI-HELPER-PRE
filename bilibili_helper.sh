@@ -2,25 +2,8 @@
 #new Env('BILIBILI-HELPER');
 
 echo "Version: v1.0"
-if ! [ -x "$(command -v java)" ]; then
-	echo "开始安装Java运行环境........."
-	apk update
-	apk add openjdk8
-fi
-if [ ! -d "/ql/scripts/bilibili/" ]; then
-	mkdir /ql/scripts/bilibili
-fi
-cd bilibili
-if [ -f "/tmp/bili-helper.log" ]; then
-	VERSION=$(grep "当前版本" "/tmp/bili-helper.log" | awk '{print $2}')
-else
-	VERSION="0"
-fi
-echo "当前版本:"$VERSION
-latest=$(curl -s https://api.github.com/repos/graytoowolf/BILIBILI-HELPER-PRE/releases/latest)
-
+latest=$(curl -s https://api.github.com/repos/graytoowolf/HELPER-PRE/releases/latest)
 latest_VERSION=$(echo $latest | jq '.tag_name' | sed 's/v\|"//g')
-echo "最新版本:"$latest_VERSION
 download_url=$(echo $latest | jq '.assets[0].browser_download_url' | sed 's/"//g')
 download() {
 	curl -L -o "./BILIBILI-HELPER.zip" "https://ghproxy.com/$download_url"
@@ -38,15 +21,32 @@ download() {
 	echo "更新完成"
 }
 function version_lt() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" != "$1"; }
+if ! [ -x "$(command -v java)" ]; then
+	echo "开始安装Java运行环境........."
+	apk update
+	apk add openjdk8
+fi
+if [ ! -d "/ql/scripts/bilibili/" ]; then
+	mkdir /ql/scripts/bilibili
+fi
+cd bilibili
+if [ ! -f "/ql/scripts/bilibili/BILIBILI-HELPER.jar" ]; then
+	echo "没找到BILIBILI-HELPER.jar，开始下载.........."
+	download
+else
+	if [ -f "/tmp/bili-helper.log" ]; then
+		VERSION=$(grep "当前版本" "/tmp/bili-helper.log" | awk '{print $2}')
+	else
+		VERSION="0"
+	fi
+fi
+echo "当前版本:"$VERSION
+echo "最新版本:"$latest_VERSION
 if version_lt $VERSION $latest_VERSION; then
 	echo "有新版本，开始更新"
 	download
 else
 	echo "已经是最新版本，不需要更新！！！"
-fi
-if [ ! -f "/ql/scripts/bilibili/BILIBILI-HELPER.jar" ]; then
-	echo "没找到BILIBILI-HELPER.jar，开始下载.........."
-	download
 fi
 files=$(ls /ql/config/*.json)
 for file_name in $files; do
