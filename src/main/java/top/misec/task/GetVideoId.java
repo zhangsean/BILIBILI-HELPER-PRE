@@ -27,7 +27,6 @@ public class GetVideoId {
     public GetVideoId() {
         this.followUpVideoList = queryDynamicNew();
         this.rankVideoList = regionRanking();
-        videoUpdate("14602398");
         videoUpdate("407099834");
         if (this.followUpVideoList.size() > 0) {
             this.followUpVideoQueue = new ArrayBlockingQueue<>(followUpVideoList.size());
@@ -97,7 +96,7 @@ public class GetVideoId {
      * @return regionId 分区id
      */
     public int randomRegion() {
-        int[] arr = {1, 3, 4, 5, 160, 22, 119};
+        int[] arr = {1, 3, 4, 5, 36, 188, 160, 22, 119};
         return arr[(int) (Math.random() * arr.length)];
     }
 

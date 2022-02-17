@@ -1,10 +1,10 @@
 package top.misec.task;
 
-import java.io.File;
-
 import lombok.extern.slf4j.Slf4j;
 import top.misec.config.ConfigLoader;
 import top.misec.utils.VersionInfo;
+
+import java.io.File;
 
 /**
  * util test.
@@ -29,5 +29,6 @@ public class UnitTest {
 
     //    new MatchGame().run();
         //ServerPush.doServerPush();
+        new UserCheck().run();
     }
 }

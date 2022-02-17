@@ -29,15 +29,10 @@ import java.util.Optional;
  * @author Junzhou Liu
  * @since 2020/10/11 4:03
  */
-
 @Slf4j
 @Data
 public class HttpUtils {
-    private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom()
-            .setConnectTimeout(5000)
-            .setConnectionRequestTimeout(5000)
-            .setSocketTimeout(10000)
-            .build();
+    private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setConnectTimeout(5000).setConnectionRequestTimeout(5000).setSocketTimeout(10000).build();
     private static String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38";
     private static CloseableHttpClient httpClient = null;
     private static CloseableHttpResponse httpResponse = null;
