@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "src/main/resources/release.json"
+      - '.github/workflows/auto_package_bilibili-helper.yml'
 
 jobs:
   build:
