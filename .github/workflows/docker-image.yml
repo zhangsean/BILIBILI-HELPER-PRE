@@ -2,8 +2,12 @@ name: Auto Build Docker Image
 
 on:
   workflow_dispatch:
-  release:
-    - '*'
+  push:
+    tags:
+      - '*'
+    paths:
+      - 'Dockerfile'
+      - '.github/workflows/docker-image.yml'
 
 jobs:
   buildx:
