@@ -1,7 +1,10 @@
-FROM openjdk:8u302-jre
+FROM openjdk:8-jre-alpine
 
-MAINTAINER JunzhouLiu Junzhou2016@outlook.com
+MAINTAINER ZhangSean zxf2342@qq.com
 
-ADD target/BILIBILI-HELPER-*.RELEASE.jar /home/BILIBILI-HELPER.jar
+ENV CONFIG="" \
+    TZ="Asia/Shanghai"
 
-ENTRYPOINT ["java","-jar","/home/BILIBILI-HELPER.jar"]
+ADD target/BILIBILI-HELPER-*.jar /opt/BILIBILI-HELPER.jar
+
+CMD ["java","-jar","/opt/BILIBILI-HELPER.jar"]
