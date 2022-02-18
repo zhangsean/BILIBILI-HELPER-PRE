@@ -41,14 +41,14 @@ public class OftenApi {
                 + "&csrf=" + ConfigLoader.helperConfig.getBiliVerify().getBiliJct();
         JsonObject jsonObject = HttpUtils.doPost(ApiList.VIP_PRIVILEGE_RECEIVE, requestBody);
         int responseCode = jsonObject.get("code").getAsInt();
+        String typeMsg = "B币券";
+        if (type == 2) {
+            typeMsg = "权益福利";
+        }
         if (responseCode == 0) {
-            if (type == 1) {
-                log.info("领取年度大会员每月赠送的B币券成功");
-            } else if (type == 2) {
-                log.info("领取大会员福利/权益成功");
-            }
+            log.info("领取年度大会员每月赠送的{}成功", typeMsg);
         } else {
-            log.warn("领取年度大会员每月赠送的B币券/大会员福利失败，原因: {}", jsonObject.get("message").getAsString());
+            log.warn("领取年度大会员每月赠送的{}失败，原因: {}", typeMsg, jsonObject.get("message").getAsString());
         }
     }
 
