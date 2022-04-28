@@ -29,15 +29,15 @@ public class VersionInfo {
 
     public static void printVersionInfo() {
         initInfo();
-        log.info("项目开源地址: {}", "https://github.com/" + projectRepo);
+        log.debug("项目开源地址: {}", "https://github.com/" + projectRepo);
         JsonObject jsonObject = HttpUtils.doGet(String.format("https://api.github.com/repos/%s/releases/latest", projectRepo));
-        log.info("-----版本信息-----");
+        log.debug("-----版本信息-----");
         log.info("当前版本: {} {}", releaseVersion, releaseDate);
         try {
             if (null != jsonObject.get("tag_name")) {
-                log.info("最新版本: {}", jsonObject.get("tag_name").getAsString().replaceAll("v", ""));
-                log.info("更新时间: {}", jsonObject.get("created_at"));
-                log.info("-----更新内容-----\n{}", jsonObject.get("body").getAsString().replaceAll("\"", ""));
+                log.debug("最新版本: {}", jsonObject.get("tag_name").getAsString().replaceAll("v", ""));
+                log.debug("更新时间: {}", jsonObject.get("created_at"));
+                log.debug("-----更新内容-----\n{}", jsonObject.get("body").getAsString().replaceAll("\"", ""));
             } else {
                 log.warn("未请求到新版本");
             }
