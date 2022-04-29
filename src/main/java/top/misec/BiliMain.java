@@ -16,11 +16,11 @@ import java.io.File;
  * @author JunzhouLiu
  * @since 2020/10/11 2:29
  */
-
 @Slf4j
 public class BiliMain {
 
     public static void main(String[] args) {
+        log.info("B站签到任务助手");
 
         VersionInfo.printVersionInfo();
 
@@ -51,6 +51,8 @@ public class BiliMain {
      * 用于腾讯云函数触发.
      */
     public static void mainHandler(HelperConfig helperConfig) {
+        log.info("B站签到任务助手");
+
         String config = System.getProperty("config");
         if (null == config) {
             log.error("云函数配置的config参数为空。");
@@ -63,7 +65,6 @@ public class BiliMain {
             log.error("配置json格式有误，请检查是否是合法的json串", e);
             return;
         }
-
 
         VersionInfo.printVersionInfo();
         //每日任务65经验
