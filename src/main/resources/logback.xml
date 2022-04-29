@@ -24,7 +24,7 @@
         <File>${LOG_PATH}/bili-helper.log</File>
         <append>false</append>
         <encoder>
-            <pattern>%msg%n%n</pattern>
+            <pattern>%msg%n</pattern>
             <charset>utf8</charset>
         </encoder>
     </appender>
